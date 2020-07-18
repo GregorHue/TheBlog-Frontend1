@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Post, PostDtoList } from '../interfaces/post';
+import { Category, CategoryDtoList } from '../interfaces/category';
 import { BASEURL } from '../utils/baseUrl';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -8,8 +8,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-
-export class PostService {
+export class CategoryService {
 
   private http: HttpClient;
 
@@ -18,9 +17,9 @@ export class PostService {
 
   }
 
-  getPosts(): Observable<Post[]> {
+  getPosts(): Observable<Category[]> {
 
-    return this.http.get<PostDtoList>(`${BASEURL}/posts`).pipe(map(list => list.posts));
+    return this.http.get<CategoryDtoList>(`${BASEURL}/categories`).pipe(map(list => list.categories));
 
   }
 }
