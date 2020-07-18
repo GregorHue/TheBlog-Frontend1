@@ -17,3 +17,8 @@ export interface Post {
   authorname: String
 }
 
+export interface PostDtoList {
+
+  posts: Post[]
+}
+
