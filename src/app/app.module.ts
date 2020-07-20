@@ -9,6 +9,7 @@ import { PostWithCommentsComponent } from './components/post-with-comments/post-
 import { ProfileComponent } from './components/profile/profile.component';
 import { UsersComponent } from './components/users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TooltipComponent } from './tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HomeComponent,
     PostWithCommentsComponent,
     ProfileComponent,
-    UsersComponent
+    UsersComponent,
+    TooltipComponent
   ],
   imports: [
     BrowserModule,

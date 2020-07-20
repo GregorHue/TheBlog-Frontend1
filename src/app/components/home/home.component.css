@@ -1,0 +1,30 @@
+.buttonLink {
+  padding: 0px 6px;
+}
+
+.buttonLink:hover {
+ background-color: rgba(0,123,255,.25);
+}
+
+.buttonLink:focus {
+   box-shadow: 0 0 0 0rem rgba(0,123,255,.25);
+}
+
+.card-title {
+ margin-bottom: 3px;
+}
+
+.btn-outline-secondary > a {
+  color: #6c757d;
+}
+
+.btn-outline-secondary:hover > a {
+  color: white
+}
+
+.tooltip {
+
+  border: 1px solid gray;
+  color: gray;
+  background-color: white;
+}

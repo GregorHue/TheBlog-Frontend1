@@ -17,7 +17,7 @@ export class CategoryService {
 
   }
 
-  getPosts(): Observable<Category[]> {
+  getCategories(): Observable<Category[]> {
 
     return this.http.get<CategoryDtoList>(`${BASEURL}/categories`).pipe(map(list => list.categories));
 

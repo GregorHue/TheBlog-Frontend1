@@ -1,4 +1,125 @@
-<p>home works!</p>
-<ul *ngFor="let post of posts">
-  <li>{{post.title}}</li>
-</ul>
+<div class="container">
+  <h3 class="text-center">Posts
+    <button type="button" class="btn button-outline-secondary border-secondary" data-toggle="button"
+      aria-pressed="false" autocomplete="off"
+      *ngIf="loggedInUserUrl && loggedInUserUrl.length > 0; else badgeLogin">New Post</button>
+    <ng-template #badgeLogin>
+      <span class="badge badge-light" style="font-size: medium; font-weight: normal">Login or
+        signup for a post
+      </span>
+    </ng-template>
+  </h3>
+  <div class="row">
+    <div class="col-sm-12 col-md-9, col-xl-10">
+      <div *ngFor="let post of posts" class="card mb-3">
+        <div class="card-body">
+          <div class="card-title font-weight-bolder">
+            {{post.title}}
+          </div>
+          <div class="card-subtitle font-italic">
+            {{post.category.name}}
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-1 align-self-center text-center">
+              <button type="button" class="btn btn-light-secondary buttonLink" ngbTooltip="UpVote"
+                *ngIf="loggedInUserUrl && loggedInUserUrl.length > 0; else buttonUpvote">
+                <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                    class="fa fa-caret-up fa-2x"></i></span>
+              </button>
+              <ng-template #buttonUpvote>
+                <button type="button" class="btn btn-light-secondary buttonLink"
+                  ngbTooltip="Login or signup for voting">
+                  <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                      class="fa fa-caret-up fa-2x"></i></span>
+                </button>
+              </ng-template>
+              <div>
+                <h5>{{post.likes}}</h5>
+              </div>
+              <button type="button" class="btn btn-light-secondary buttonLink" ngbTooltip="DownVote"
+                *ngIf="loggedInUserUrl && loggedInUserUrl.length > 0; else buttonDownvote">
+                <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                    class="fa fa-caret-down fa-2x"></i></span>
+              </button>
+              <ng-template #buttonDownvote>
+                <button type="button" class="btn btn-light-secondary buttonLink"
+                  ngbTooltip="Login or signup for voting">
+                  <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                      class="fa fa-caret-down fa-2x"></i></span>
+                </button>
+              </ng-template>
+            </div>
+            <div class="col-11 mt-3">
+              <div class="card-text">
+                {{post.content}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-3 mt-2">
+              <a href="{{post.post_url + '/comments'}}" class="btn btn-outline-primary"
+                ngbTooltip="Show comments">
+                <app-tooltip tooltipClass="tooltip"></app-tooltip>
+                <span class="fa fa-comments fa-lg"></span>
+              </a>
+            </div>
+            <div class="col-sm-12 col-md-9, col-lg-6, col-xl-7 d-flex">
+              <div *ngIf="post.lastUpdatedAt;else  created">
+                <div class="font-italic">
+                  <span class="small">Created
+                    {{post.createdAt.substring(0, 10)}}</span>
+                </div>
+                <div class="font-italic">
+                  <span class="small">Edited {{post.lastUpdatedAt.substring(0, 10)}}</span>
+                </div>
+              </div>
+              <ng-template #created>
+                <div class="font-italic align-self-center">
+                  <span class="small">Created
+                    {{post.createdAt.substring(0, 10)}}</span>
+                </div>
+              </ng-template>
+              <div class="align-self-end mx-2"><span
+                  class="fa fa-user-circle fa-2x text-secondary"></span>
+              </div>
+              <div class="align-self-center font-italic">
+                {{post.authorname}}
+              </div>
+            </div>
+            <div class="col-sm-12 col-lg-3 col-xl-2">
+              <button type="button" *ngIf="loggedInUserUrl === post.author_url"
+                class="btn btn-outline-primary" style="margin-top: 7px;">
+                <span class="fa fa-pencil fa-lg"></span>
+              </button>
+              {{' '}}
+              <button type="button" *ngIf="loggedInUserUrl !== ''" class="btn btn-outline-primary"
+                style="margin-top: 7px;">
+                <span class="fa fa-trash fa-lg"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col text-center" *ngIf="categories && categories.length > 0">
+      <h4>Channels</h4>
+      <div class="btn-group-vertical">
+        <button *ngFor="let categoryName of categoryNames" type="button"
+          class="btn btn-outline-primary my-2">
+          {{categoryName}}
+        </button>
+        <hr />
+        <h4>Sort By</h4>
+        <div class="btn-group-vertical">
+          <button type="button" active="true" class="btn btn-outline-primary my-2">
+            Newest
+          </button>
+          <button type="button" class="btn btn-outline-primary my-2">
+            Best
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
