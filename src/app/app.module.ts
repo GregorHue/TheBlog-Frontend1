@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PostWithCommentsComponent } from './components/post-with-comments/post-with-comments.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UsersComponent } from './components/users/users.component';
+import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TooltipComponent } from './tooltip/tooltip.component';
 
@@ -24,6 +25,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    FormsModule,
     NgbModule
   ],
   providers: [],

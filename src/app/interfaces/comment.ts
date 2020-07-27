@@ -4,13 +4,13 @@ export interface Comment {
 
   createdAt: Date,
   lastUpdatedAt: Date,
-  content: String,
+  content: string,
   likes: number,
-  comment_url: String,
-  author_url: String,
-  post_url: String,
+  comment_url: string,
+  author_url: string,
+  post_url: string,
   option: Vote,
-  authorname: String
+  authorname: string
 }
 
 export interface CommentDtoList {

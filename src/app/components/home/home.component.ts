@@ -14,9 +14,18 @@ export class HomeComponent implements OnInit {
 
   posts: Post[] = [];
   categories: Category[] = [];
-  categoryNames: String[] = [];
+  categoryNames: string[] = [];
   loggedInUserUrl: string = '/users/2';
+  modelSort = "new";
+  modelCategory = "All";
 
+  logSort(): void {
+    console.log(this.modelSort);
+  }
+
+  logCategory(): void {
+    console.log(this.modelCategory);
+  }
 
   constructor(private postService: PostService, private categoryService: CategoryService) { }
 

@@ -23,4 +23,9 @@ export class PostService {
     return this.http.get<PostDtoList>(`${BASEURL}/posts`).pipe(map(list => list.posts));
 
   }
+
+  getPost(postId: number): Observable<Post> {
+
+    return this.http.get<Post>(`${BASEURL}/posts/${postId}`)
+  }
 }

@@ -1,5 +1,5 @@
 export interface Category {
-  name: String
+  name: string
 }
 
 export interface CategoryDtoList {

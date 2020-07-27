@@ -19,7 +19,7 @@ export class CommentService {
 
   getCommentsByPost(postId: number): Observable<Comment[]> {
 
-    return this.http.get<CommentDtoList>(`/posts/${postId}`).pipe(map(list => list.comments));
+    return this.http.get<CommentDtoList>(`${BASEURL}/posts/${postId}/comments`).pipe(map(list => list.comments));
 
   }
 }

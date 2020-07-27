@@ -5,16 +5,16 @@ export interface Post {
 
   createdAt: Date,
   lastUpdatedAt: Date,
-  title: String,
-  content: String,
+  title: string,
+  content: string,
   likes: number,
   category: Category,
-  author_url: String,
-  post_url: String,
-  comments_url: String,
-  numberOfComments: Number,
+  author_url: string,
+  post_url: string,
+  comments_url: string,
+  numberOfComments: number,
   option: Vote,
-  authorname: String
+  authorname: string
 }
 
 export interface PostDtoList {

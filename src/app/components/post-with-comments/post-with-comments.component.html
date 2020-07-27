@@ -1,1 +1,174 @@
-<p>post-with-comments works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h4 class="text-center">Post</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="card mb-2" *ngIf="post">
+        <div class="card-body">
+          <div class="card-title font-weight-bolder">
+            {{post.title}}
+          </div>
+          <div class="card-subtitle">
+            <span class="font-italic">
+              {{post.category.name}}
+            </span>
+          </div>
+          <div class="row d-flex">
+            <div class="col-1 align-self-center text-center">
+              <div *ngIf="loggedInUserUrl === ''; else buttonPostUpvote">
+                <button type="button" class="btn btn-light-secondary buttonLink"
+                  ngbTooltip="Login or signup for voting">
+                  <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                      class="fa fa-caret-up fa-2x"></i></span>
+                </button>
+              </div>
+              <ng-template #buttonPostUpvote>
+                <button type="button" class="btn btn-light-secondary buttonLink"
+                  ngbTooltip="Upvote">
+                  <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                      class="fa fa-caret-up fa-2x"></i></span>
+                </button>
+              </ng-template>
+              <div>
+                <h5>{{post.likes}}</h5>
+              </div>
+              <div *ngIf="loggedInUserUrl === ''; else buttonPostDownvote">
+                <button type="button" class="btn btn-light-secondary buttonLink"
+                  ngbTooltip="Login or signup for voting">
+                  <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                      class="fa fa-caret-down fa-2x"></i></span>
+                </button>
+              </div>
+              <ng-template #buttonPostDownvote>
+                <button type="button" class="btn btn-light-secondary buttonLink"
+                  ngbTooltip="Downvote">
+                  <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
+                      class="fa fa-caret-down fa-2x"></i></span>
+                </button>
+              </ng-template>
+            </div>
+            <div class="col-11 align-self-center">
+              <div class="card-text">
+                {{post.content}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="post">
+        <div class="col">
+          <h4 class="text-center" *ngIf="post.numberOfComments === 1, else plural">
+            {{post.numberOfComments}}{{'  Comment'}}
+          </h4>
+          <ng-template #plural>
+            <h4 class="text-center">
+              {{post.numberOfComments}}{{' Comments'}}
+            </h4>
+          </ng-template>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 col-md-9 col-xl-10">
+          <div *ngFor="let comment of comments" class="card mb-3">
+            <div class="card-body" style="padding-bottom: 10; padding-top: 5">
+              <div class="row  d-flex">
+                <div class="col-1 align-self-center text-center">
+                  <div *ngIf="loggedInUserUrl === ''; else buttonCommentUpvote">
+                    <button type="button" class="btn btn-light-secondary buttonLink"
+                      ngbTooltip="Login or signup for voting">
+                      <app-tooltip tooltipClass="tooltip"></app-tooltip><span
+                        class="text-secondary"><i class="fa fa-caret-up fa-2x"></i></span>
+                    </button>
+                  </div>
+                  <ng-template #buttonCommentUpvote>
+                    <button type="button" class="btn btn-light-secondary buttonLink"
+                      ngbTooltip="Upvote">
+                      <app-tooltip tooltipClass="tooltip"></app-tooltip><span
+                        class="text-secondary"><i class="fa fa-caret-up fa-2x"></i></span>
+                    </button>
+                  </ng-template>
+                  <div>
+                    <h5>{{comment.likes}}</h5>
+                  </div>
+                  <div *ngIf="loggedInUserUrl === ''; else buttonCommentDownvote">
+                    <button type="button" class="btn btn-light-secondary buttonLink"
+                      ngbTooltip="Login or signup for voting">
+                      <app-tooltip tooltipClass="tooltip"></app-tooltip><span
+                        class="text-secondary"><i class="fa fa-caret-down fa-2x"></i></span>
+                    </button>
+                  </div>
+                  <ng-template #buttonCommentDownvote>
+                    <button type="button" class="btn btn-light-secondary buttonLink"
+                      ngbTooltip="Downvote">
+                      <app-tooltip tooltipClass="tooltip"></app-tooltip><span
+                        class="text-secondary"><i class="fa fa-caret-down fa-2x"></i></span>
+                    </button>
+                  </ng-template>
+                </div>
+                <div class="col-11 align-self-center">
+                  <div class="card-text">
+                    {{comment.content}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-8 offset-4 col-lg-5 offset-4 col-xl-6 d-flex">
+                  <div *ngIf="comment.lastUpdatedAt;else created">
+                    <div class="font-italic">
+                      <span class="small">Created
+                        {{comment.createdAt.toString().substring(0, 10)}}</span>
+                    </div>
+                    <div class="font-italic">
+                      <span class="small">Edited
+                        {{comment.lastUpdatedAt.toString().substring(0, 10)}}</span>
+                    </div>
+                  </div>
+                  <ng-template #created>
+                    <div class="font-italic align-self-center">
+                      <span class="small">Created
+                        {{comment.createdAt.toString().substring(0, 10)}}</span>
+                    </div>
+                  </ng-template>
+                  <div class="align-self-end mx-2"><span
+                      class="fa fa-user-circle fa-2x text-secondary"></span>
+                  </div>
+                  <div class="align-self-center font-italic">
+                    {{comment.authorname}}
+                  </div>
+                </div>
+                <div class="col-sm-12 col-lg-3 col-xl-2">
+                  <button type="button" *ngIf="loggedInUserUrl === post.author_url"
+                    class="btn btn-outline-primary" style="margin-top: 7px;">
+                    <span class="fa fa-pencil fa-lg"></span>
+                  </button>
+                  {{' '}}
+                  <button type="button" *ngIf="loggedInUserUrl !== ''"
+                    class="btn btn-outline-primary" style="margin-top: 7px;">
+                    <span class="fa fa-trash fa-lg"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col text-center">
+          <h4>Sort By</h4>
+          <div class="btn-group-vertical btn-group-toggle" ngbRadioGroup name="radioSort"
+            [(ngModel)]="model" (change)="log()">
+            <label ngbButtonLabel class="btn-outline-primary my-2"
+              style="border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;">
+              <input ngbButton type="radio" value="new">Newest
+            </label>
+            <label ngbButtonLabel class="btn-outline-primary my-2"
+              style="border-top-left-radius: 4px; border-top-right-radius: 4px;">
+              <input ngbButton type="radio" value="best">Best
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
