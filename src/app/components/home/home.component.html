@@ -1,8 +1,8 @@
 <div class="container">
   <h3 class="text-center">Posts
-    <button type="button" class="btn button-outline-secondary border-secondary" data-toggle="button"
-      aria-pressed="false" autocomplete="off"
-      *ngIf="loggedInUserUrl && loggedInUserUrl.length > 0; else badgeLogin">New Post</button>
+    <button type="button" class="btn button-outline-secondary border-secondary switch"
+      (click)="logSort()" *ngIf="loggedInUserUrl && loggedInUserUrl.length > 0; else badgeLogin">New
+      Post</button>
     <ng-template #badgeLogin>
       <span class="badge badge-light" style="font-size: medium; font-weight: normal">Login or
         signup for a post
@@ -22,13 +22,13 @@
           <hr />
           <div class="row">
             <div class="col-1 align-self-center text-center">
-              <button type="button" class="btn btn-light-secondary buttonLink" ngbTooltip="Upvote"
+              <button type="button" class="btn buttonLink" ngbTooltip="Upvote"
                 *ngIf="loggedInUserUrl.length > 0; else buttonUpvote">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                     class="fa fa-caret-up fa-2x"></i></span>
               </button>
               <ng-template #buttonUpvote>
-                <button type="button" class="btn btn-light-secondary buttonLink"
+                <button type="button" class="btn buttonLink"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-up fa-2x"></i></span>
@@ -37,13 +37,13 @@
               <div>
                 <h5>{{post.likes}}</h5>
               </div>
-              <button type="button" class="btn btn-light-secondary buttonLink" ngbTooltip="Downvote"
+              <button type="button" class="btn buttonLink" ngbTooltip="Downvote"
                 *ngIf="loggedInUserUrl.length > 0; else buttonDownvote">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                     class="fa fa-caret-down fa-2x"></i></span>
               </button>
               <ng-template #buttonDownvote>
-                <button type="button" class="btn btn-light-secondary buttonLink"
+                <button type="button" class="btn buttonLink"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-down fa-2x"></i></span>

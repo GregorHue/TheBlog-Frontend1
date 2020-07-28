@@ -14,12 +14,9 @@
  margin-bottom: 3px;
 }
 
-.btn-outline-secondary > a {
-  color: #6c757d;
-}
-
-.btn-outline-secondary:hover > a {
-  color: white
+.card-body {
+  padding-top: 1.2rem;
+  padding-bottom: 1.0rem;
 }
 
 .tooltip {
@@ -28,3 +25,17 @@
   color: gray;
   background-color: white;
 }
+
+.switch {
+  color: rgba(0, 0, 0, 0.65)
+}
+
+.switch:hover {
+  color: white;
+  background-color: #6c757d;
+}
+
+.switch:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108,117,125,.5);
+}
+

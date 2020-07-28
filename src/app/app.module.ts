@@ -11,6 +11,7 @@ import { UsersComponent } from './components/users/users.component';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TooltipComponent } from './tooltip/tooltip.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TooltipComponent } from './tooltip/tooltip.component';
     PostWithCommentsComponent,
     ProfileComponent,
     UsersComponent,
-    TooltipComponent
+    TooltipComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

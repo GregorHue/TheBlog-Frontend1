@@ -19,15 +19,14 @@
           <div class="row d-flex">
             <div class="col-1 align-self-center text-center">
               <div *ngIf="loggedInUserUrl === ''; else buttonPostUpvote">
-                <button type="button" class="btn btn-light-secondary buttonLink"
+                <button type="button" class="btn buttonLink"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-up fa-2x"></i></span>
                 </button>
               </div>
               <ng-template #buttonPostUpvote>
-                <button type="button" class="btn btn-light-secondary buttonLink"
-                  ngbTooltip="Upvote">
+                <button type="button" class="btn buttonLink" ngbTooltip="Upvote">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-up fa-2x"></i></span>
                 </button>
@@ -36,15 +35,14 @@
                 <h5>{{post.likes}}</h5>
               </div>
               <div *ngIf="loggedInUserUrl === ''; else buttonPostDownvote">
-                <button type="button" class="btn btn-light-secondary buttonLink"
+                <button type="button" class="btn buttonLink"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-down fa-2x"></i></span>
                 </button>
               </div>
               <ng-template #buttonPostDownvote>
-                <button type="button" class="btn btn-light-secondary buttonLink"
-                  ngbTooltip="Downvote">
+                <button type="button" class="btn buttonLink" ngbTooltip="Downvote">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-down fa-2x"></i></span>
                 </button>
@@ -53,6 +51,45 @@
             <div class="col-11 align-self-center">
               <div class="card-text">
                 {{post.content}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4 mt-2">
+              <div *ngIf="loggedInUserUrl !== ''; else badge">
+                <button type="button" class="btn btn-outline-primary" ngbTooltip="New comment">
+                  <app-tooltip tooltipClass="tooltip"></app-tooltip><span><i
+                      class="fa fa-commenting fa-lg"></i></span>
+                </button>
+              </div>
+              <ng-template #badge>
+                <div class="badge badge-light" style="font-size: 14; font-weight: normal;">
+                  Login or signup for a comment
+                </div>
+              </ng-template>
+            </div>
+            <div class="col-sm-12 col-md-9, col-lg-6, col-xl-7 d-flex">
+              <div *ngIf="post.lastUpdatedAt;else created">
+                <div class="font-italic">
+                  <span class="small">Created
+                    {{post.createdAt.toString().substring(0, 10)}}</span>
+                </div>
+                <div class="font-italic">
+                  <span class="small">Edited
+                    {{post.lastUpdatedAt.toString().substring(0, 10)}}</span>
+                </div>
+              </div>
+              <ng-template #created>
+                <div class="font-italic align-self-center">
+                  <span class="small">Created
+                    {{post.createdAt.toString().substring(0, 10)}}</span>
+                </div>
+              </ng-template>
+              <div class="align-self-end mx-2"><span
+                  class="fa fa-user-circle fa-2x text-secondary"></span>
+              </div>
+              <div class="align-self-center font-italic">
+                {{post.authorname}}
               </div>
             </div>
           </div>
@@ -141,12 +178,12 @@
                 </div>
                 <div class="col-sm-12 col-lg-3 col-xl-2">
                   <button type="button" *ngIf="loggedInUserUrl === post.author_url"
-                    class="btn btn-outline-primary" style="margin-top: 7px;">
+                    class="btn btn-outline-primary">
                     <span class="fa fa-pencil fa-lg"></span>
                   </button>
                   {{' '}}
                   <button type="button" *ngIf="loggedInUserUrl !== ''"
-                    class="btn btn-outline-primary" style="margin-top: 7px;">
+                    class="btn btn-outline-primary">
                     <span class="fa fa-trash fa-lg"></span>
                   </button>
                 </div>

@@ -18,7 +18,7 @@ const routes: Routes = [
     component: PostWithCommentsComponent
   },
   {
-    path: 'users/1',
+    path: 'users/2',
     pathMatch: 'full',
     component: ProfileComponent,
   },

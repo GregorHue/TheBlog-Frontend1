@@ -6,7 +6,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
   styles: [`
     .tooltip {
-      width: 130%;
+      width: 120%;
     }
     .tooltip .tooltip-inner {
       background-color: white;
