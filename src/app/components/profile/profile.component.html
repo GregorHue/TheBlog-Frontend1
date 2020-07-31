@@ -1,1 +1,81 @@
-<p>profile works!</p>
+<h3 class="text-center mb-3">Edit Profile</h3>
+<div class="container">
+  <ngb-alert [type]="'success'" (close)="closeAlert()" *ngIf="isAlertOpen">The changes were
+    succesfully
+    saved.</ngb-alert>
+  <form #user="ngForm" (ngSubmit)="onSubmit()" *ngIf="model">
+    <div class="row form-group">
+      <label for="username" class="col-sm-2 align-self-end">Username</label>
+      <input type="text" class="form-control col-sm-4" id="username" name="username" required
+        [(ngModel)]="model.username">
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="row form-group">
+          <label for="password" class="col-sm-4 align-self-end">New Password</label>
+          <input class="form-control col-sm-8" type="password" id="password"
+            [(ngModel)]="model.password">
+        </div>
+        <div class="row form-group">
+          <label for="email" class="col-sm-4 align-self-end">Email</label>
+          <input type="email" class="form-control col-sm-8" id="email" name="email" required
+            [(ngModel)]="model.email">
+        </div>
+        <div class="row form-group">
+          <label for="firstName" class="col-sm-4 align-self-end">First Name</label>
+          <input type="text" class="form-control col-sm-8" id="firstName" name="firstName" required
+            [(ngModel)]="model.firstName">
+        </div>
+        <div class="row form-group">
+          <label for="lastName" class="col-sm-4 align-self-end">Last Name</label>
+          <input type="text" class="form-control col-sm-8" id="lastName" name="lastName" required
+            [(ngModel)]="model.lastName">
+        </div>
+        <div class="row form-group">
+          <label for="gender" class="col-sm-4 align-self-end">Gender</label>
+          <select class="form-control col-sm-4" id="gender" [(ngModel)]="model.gender"
+            name="gender">
+            <option *ngFor="let gender of genders" [value]="gender">{{gender}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="row">
+          <div class="col text-center">
+            <h4 style="margin-left: 40px;">Profile Picture</h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <span style="font-size: 192px; margin-left: 40px; opacity: 0.7;"
+              class="fa fa-photo fa-5x"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label for="houseNumber" class="col-sm-2 align-self-end">House Number</label>
+      <input type="text" class="form-control col-sm-4" id="houseNumber" name="houseNumber"
+        [(ngModel)]="model.houseNumber">
+      <label for="street" class="col-sm-1 offset-1 align-self-end">Street</label>
+      <input type="text" class="form-control col-sm-4" id="street" name="street"
+        [(ngModel)]="model.street">
+    </div>
+    <div class="row form-group">
+      <label for="city" class="col-sm-2 align-self-end">City</label>
+      <input type="text" class="form-control col-sm-4" id="city" name="city"
+        [(ngModel)]="model.city">
+      <label for="postalCode" class="col-sm-1 offset-1 align-self-end">Zip Code</label>
+      <input type="text" class="form-control col-sm-4" id="postalCode" name="postalCode"
+        [(ngModel)]="model.postalCode">
+    </div>
+    <hr />
+    <div class="row form-group">
+      <div class="col-md-3 offset-9">
+        <button type="submit" class="btn btn-primary mr-1">
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

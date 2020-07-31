@@ -35,7 +35,7 @@ export class PostWithCommentsComponent implements OnInit {
     })).subscribe(postId => {
       this.postService.getPost(postId).subscribe(post => this.post = post, error => console.log(error));
       this.commentService.getCommentsByPost(postId).subscribe(comments => this.comments = comments, error => console.log(error));
-    }), error => console.log(error);
+    }, (error: any) => console.log(error));
 
   }
 
