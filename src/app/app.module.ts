@@ -13,6 +13,7 @@ import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { HeaderComponent } from './header/header.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { NewPostComponent } from './components/new-post/new-post.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
     UsersComponent,
     TooltipComponent,
     HeaderComponent,
-    EditPostComponent
+    EditPostComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +34,6 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
     FormsModule,
     NgbModule
   ],
-  entryComponents: [EditPostComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
