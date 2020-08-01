@@ -3,6 +3,8 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../..//interfaces/post';
 import { Category } from '../../interfaces/category';
 import { CategoryService } from 'src/app/services/category.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EditPostComponent } from '../edit-post/edit-post.component';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +29,10 @@ export class HomeComponent implements OnInit {
     console.log(this.modelCategory);
   }
 
-  constructor(private postService: PostService, private categoryService: CategoryService) { }
+  constructor(
+    private postService: PostService,
+    private categoryService: CategoryService,
+    public modal: NgbModal) { }
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe(posts => this.posts = posts, error => console.log(error));
@@ -35,4 +40,8 @@ export class HomeComponent implements OnInit {
 
   }
 
+  open(post: Post) {
+    const modalRef = this.modal.open(EditPostComponent, { size: 'lg', centered: true });
+    modalRef.componentInstance.post = post;
+  }
 }

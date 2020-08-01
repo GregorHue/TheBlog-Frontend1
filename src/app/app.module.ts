@@ -9,9 +9,10 @@ import { PostWithCommentsComponent } from './components/post-with-comments/post-
 import { ProfileComponent } from './components/profile/profile.component';
 import { UsersComponent } from './components/users/users.component';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TooltipComponent } from './tooltip/tooltip.component';
 import { HeaderComponent } from './header/header.component';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HeaderComponent } from './header/header.component';
     ProfileComponent,
     UsersComponent,
     TooltipComponent,
-    HeaderComponent
+    HeaderComponent,
+    EditPostComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,7 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     NgbModule
   ],
+  entryComponents: [EditPostComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
