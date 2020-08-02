@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
 import { NewCommentComponent } from './components/new-comment/new-comment.component';
+import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NewCommentComponent } from './components/new-comment/new-comment.compon
     HeaderComponent,
     EditPostComponent,
     NewPostComponent,
-    NewCommentComponent
+    NewCommentComponent,
+    EditCommentComponent
   ],
   imports: [
     BrowserModule,

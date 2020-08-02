@@ -8,10 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewCommentComponent } from '../new-comment/new-comment.component';
-
-
-
-
+import { EditCommentComponent } from '../edit-comment/edit-comment.component';
 
 @Component({
   selector: 'app-post-with-comments',
@@ -42,6 +39,11 @@ export class PostWithCommentsComponent implements OnInit {
       this.commentService.getCommentsByPost(postId).subscribe(comments => this.comments = comments, error => console.log(error));
     }, (error: any) => console.log(error));
 
+  }
+
+  openEditComment(comment: Comment) {
+    const modalRef = this.modal.open(EditCommentComponent, { size: 'lg', centered: true });
+    modalRef.componentInstance.comment = comment;
   }
 
   openNewComment() {
