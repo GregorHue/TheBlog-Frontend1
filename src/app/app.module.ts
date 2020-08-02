@@ -14,6 +14,7 @@ import { TooltipComponent } from './tooltip/tooltip.component';
 import { HeaderComponent } from './header/header.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { NewPostComponent } from './components/new-post/new-post.component';
+import { NewCommentComponent } from './components/new-comment/new-comment.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { NewPostComponent } from './components/new-post/new-post.component';
     TooltipComponent,
     HeaderComponent,
     EditPostComponent,
-    NewPostComponent
+    NewPostComponent,
+    NewCommentComponent
   ],
   imports: [
     BrowserModule,

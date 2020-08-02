@@ -57,7 +57,8 @@
           <div class="row">
             <div class="col-lg-4 mt-2">
               <div *ngIf="loggedInUserUrl !== ''; else badge">
-                <button type="button" class="btn btn-outline-primary" ngbTooltip="New comment">
+                <button type="button" class="btn btn-outline-primary" ngbTooltip="New comment"
+                  (click)="openNewComment()">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span><i
                       class="fa fa-commenting fa-lg"></i></span>
                 </button>
