@@ -179,7 +179,7 @@
                 </div>
                 <div class="col-sm-12 col-lg-3 col-xl-2">
                   <button type="button" *ngIf="loggedInUserUrl === post.author_url"
-                    class="btn btn-outline-primary">
+                    class="btn btn-outline-primary" (click)="openEditComment(comment)">
                     <span class="fa fa-pencil fa-lg"></span>
                   </button>
                   {{' '}}
