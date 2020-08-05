@@ -59,7 +59,7 @@
           </div>
           <div class="row">
             <div class="col-sm-3 mt-2">
-              <a href="{{post.post_url + '/comments'}}" class="btn btn-outline-primary"
+              <a [routerLink]="post.post_url + '/comments'" class="btn btn-outline-primary"
                 ngbTooltip="Show comments">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip>
                 <span class="fa fa-comments fa-lg"></span>
