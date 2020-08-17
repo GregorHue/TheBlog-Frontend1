@@ -5,28 +5,25 @@ import { BASEURL } from '../utils/baseUrl';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class UserService {
 
   cache$: Observable<User[]>;
-  private http: HttpClient;
-
-  token = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfdXJsIjoiL3VzZXJzLzIiLCJleHAiOjE1OTY4ODk2OTQsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.uprOL6LU1Y0EueXvuAGuMpZvQVzC7NUknGW9wno5iD5t46TzzF9lDPOdx40KHwKI6ERpXlTmBzIyV4UDpLrZBA'
 
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': this.token
+      'Authorization': this.authService.getToken()
     })
   };
 
-  constructor(http: HttpClient) {
-    this.http = http;
-
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   getUsers(): Observable<User[]> {

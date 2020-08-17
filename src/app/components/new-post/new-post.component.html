@@ -4,7 +4,7 @@
     <span>&times;</span>
   </button>
 </div>
-<form #editPost="ngForm" (ngSubmit)="onSubmit()" *ngIf="newPost">
+<form #createPost="ngForm" (ngSubmit)="onSubmit()" *ngIf="newPost">
   <div class="modal-body" style="padding-bottom: 0px;">
     <div class="row form-group">
       <label for="title" class="col-sm-2 align-self-end">Title</label>

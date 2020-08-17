@@ -64,6 +64,10 @@ export class HomeComponent implements OnInit {
       authorname: null
     }
     modalRef.componentInstance.newPost = newPost;
+    modalRef.result.then((result$) => {
+      result$.subscribe((post: Post) => { this.posts = this.posts.concat([post]); this.postService.updateCache(post); });
+
+    });
   }
 
 }

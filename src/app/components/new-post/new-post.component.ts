@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from 'src/app/interfaces/post';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/interfaces/category';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-new-post',
@@ -15,8 +16,9 @@ export class NewPostComponent implements OnInit {
   displayedCategories: string[];
 
   @Input() newPost: Post;
+  @Output() post: Post;
 
-  constructor(public activeModal: NgbActiveModal, private categoryService: CategoryService) { }
+  constructor(public activeModal: NgbActiveModal, private categoryService: CategoryService, private postService: PostService) { }
 
   ngOnInit(): void {
     this.categoryService.getCategories().subscribe(categories => this.categories = categories);
@@ -24,6 +26,6 @@ export class NewPostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.activeModal.close();
+    this.activeModal.close(this.postService.savePost(this.newPost));
   }
 }
