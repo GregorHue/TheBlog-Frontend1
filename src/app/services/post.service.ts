@@ -46,17 +46,35 @@ export class PostService {
     return result;
   }
 
-  savePost(post: Post): Observable<Post> {
+  create(post: Post): Observable<Post> {
     return this.http.post<Post>(`${BASEURL}/posts`, JSON.stringify(post), this.httpOptions);
   }
 
-  updateCache(post: Post) {
-    let posts: Post[];
-    this.cache$.subscribe(p => posts = p)
-    posts = posts.concat([post]);
-    console.log(posts.length);
-    this.cache$ = Observable.create((observer) => {
-      observer.next(posts);
-    });
+  updateCacheAfterCreate(post: Post) {
+    this.cache$ = this.cache$.pipe(map(cache => cache.concat([post])));
+  }
+
+  update(post: Post): Observable<Post> {
+    return this.http.put<Post>(`${BASEURL}${post.post_url}`, JSON.stringify(post), this.httpOptions);
+  }
+
+  updateCacheAfterUpdate(post: Post) {
+    this.cache$ = this.cache$.pipe(map(cache => cache.filter(p => p.post_url !== post.post_url).concat([post])));
+  }
+
+  upVote(post: Post): Observable<Post> {
+    return this.http.patch<Post>(`${BASEURL}${post.post_url}`, JSON.stringify({ option: "upVote" }), this.httpOptions);
+  }
+
+  downVote(post: Post): Observable<Post> {
+    return this.http.patch<Post>(`${BASEURL}${post.post_url}`, JSON.stringify({ option: "downVote" }), this.httpOptions);
+  }
+
+  delete(post: Post): Observable<Post> {
+    return this.http.delete<Post>(`${BASEURL}${post.post_url}`, this.httpOptions);
+  }
+
+  updateCacheAfterDelete(post: Post) {
+    this.cache$ = this.cache$.pipe(map(cache => cache.filter(p => p.post_url !== post.post_url)));
   }
 }

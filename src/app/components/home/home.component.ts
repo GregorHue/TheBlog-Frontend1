@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { Post } from '../..//interfaces/post';
 import { Category } from '../../interfaces/category';
@@ -22,6 +22,9 @@ export class HomeComponent implements OnInit {
   loggedInUserUrl: string = '/users/2';
   modelSort = "new";
   modelCategory = "All";
+  currentPost: Post;
+
+  @ViewChild('confirmation') confirmation: ElementRef;
 
   logSort(): void {
     console.log(this.modelSort);
@@ -38,13 +41,23 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.postService.getPosts().subscribe(posts => this.posts = posts, error => console.log(error));
-    this.categoryService.getCategories().subscribe(categories => { this.categories = categories; this.categoryNames = this.categories.map(category => category.name); }, error => console.log(error));
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      this.categoryNames = this.categories.map(category => category.name);
+    }, error => console.log(error));
 
   }
 
   openEditPost(post: Post) {
     const modalRef = this.modal.open(EditPostComponent, { size: 'lg', centered: true });
     modalRef.componentInstance.post = post;
+    modalRef.result.then((post$) => {
+      post$.subscribe((post: Post) => {
+        this.posts = this.posts.filter(p => p.post_url !== post.post_url).concat([post]);
+        this.postService.updateCacheAfterUpdate(post);
+      });
+    })
+      .catch(error => console.log(error));
   }
 
   openNewPost() {
@@ -64,10 +77,37 @@ export class HomeComponent implements OnInit {
       authorname: null
     }
     modalRef.componentInstance.newPost = newPost;
-    modalRef.result.then((result$) => {
-      result$.subscribe((post: Post) => { this.posts = this.posts.concat([post]); this.postService.updateCache(post); });
+    modalRef.result.then((post$) => {
+      post$.subscribe((post: Post) => {
+        this.posts = this.posts.concat([post]);
+        this.postService.updateCacheAfterCreate(post);
+      });
+    })
+      .catch(error => console.log(error));
+  }
 
+  upVote(post: Post) {
+    this.postService.upVote(post).subscribe((p: Post) => {
+      this.posts = this.posts.filter(p => p.post_url !== post.post_url).concat([p]);
+      this.postService.updateCacheAfterUpdate(p);
     });
   }
 
+  downVote(post: Post) {
+    this.postService.downVote(post).subscribe((p: Post) => {
+      this.posts = this.posts.filter(p => p.post_url !== post.post_url).concat([p]);
+      this.postService.updateCacheAfterUpdate(p);
+    });
+  }
+
+  delete(post: Post) {
+    this.postService.delete(post).subscribe(() => {
+      this.posts = this.posts.filter(p => p.post_url !== post.post_url);
+      this.postService.updateCacheAfterDelete(post);
+    })
+  }
+  open(post: Post) {
+    this.modal.open(this.confirmation, { centered: true });
+    this.currentPost = post;
+  }
 }

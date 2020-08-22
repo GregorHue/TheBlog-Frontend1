@@ -16,7 +16,6 @@ export class NewPostComponent implements OnInit {
   displayedCategories: string[];
 
   @Input() newPost: Post;
-  @Output() post: Post;
 
   constructor(public activeModal: NgbActiveModal, private categoryService: CategoryService, private postService: PostService) { }
 
@@ -26,6 +25,6 @@ export class NewPostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.activeModal.close(this.postService.savePost(this.newPost));
+    this.activeModal.close(this.postService.create(this.newPost));
   }
 }

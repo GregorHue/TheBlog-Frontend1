@@ -24,7 +24,7 @@
           <div class="row">
             <div class="col-1 align-self-center text-center">
               <button type="button" class="btn buttonLink" ngbTooltip="Upvote"
-                *ngIf="loggedInUserUrl.length > 0; else buttonUpvote">
+                *ngIf="loggedInUserUrl.length > 0; else buttonUpvote" (click)="upVote(post)">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                     class="fa fa-caret-up fa-2x"></i></span>
               </button>
@@ -39,7 +39,7 @@
                 <h5>{{post.likes}}</h5>
               </div>
               <button type="button" class="btn buttonLink" ngbTooltip="Downvote"
-                *ngIf="loggedInUserUrl.length > 0; else buttonDownvote">
+                *ngIf="loggedInUserUrl.length > 0; else buttonDownvote" (click)="downVote(post)">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                     class="fa fa-caret-down fa-2x"></i></span>
               </button>
@@ -96,7 +96,7 @@
               </button>
               {{' '}}
               <button type="button" *ngIf="loggedInUserUrl !== ''" class="btn btn-outline-primary"
-                style="margin-top: 7px;">
+                (click)="open(post)" style="margin-top: 7px;">
                 <span class="fa fa-trash fa-lg"></span>
               </button>
             </div>
@@ -128,4 +128,22 @@
         </label>
       </div>
     </div>
+    <ng-template #confirmation let-modal>
+      <div class="modal-header">
+        <h4 class="modal-title">Confirmation</h4>
+        <button type="button" class="close" (click)="modal.dismiss()">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="padding-bottom: 0px;">
+        <div class="d-flex justify-content-start">
+          <span>Do you really want to delete the post?</span>
+        </div>
+        <div class="modal-footer rightPadding">
+          <button type="button" class="btn btn-primary"
+            (click)="modal.close(delete(currentPost))">Save</button>{{' '}}
+          <button type="button" class="btn btn-primary" (click)="modal.dismiss()">Cancel</button>
+        </div>
+      </div>
+    </ng-template>
   </div>
