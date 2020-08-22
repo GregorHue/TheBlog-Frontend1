@@ -26,7 +26,8 @@
                 </button>
               </div>
               <ng-template #buttonPostUpvote>
-                <button type="button" class="btn buttonLink" ngbTooltip="Upvote">
+                <button type="button" class="btn buttonLink" ngbTooltip="Upvote"
+                  (click)="upvote(post)">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-up fa-2x"></i></span>
                 </button>
@@ -42,7 +43,8 @@
                 </button>
               </div>
               <ng-template #buttonPostDownvote>
-                <button type="button" class="btn buttonLink" ngbTooltip="Downvote">
+                <button type="button" class="btn buttonLink" ngbTooltip="Downvote"
+                  (click)="downvote(post)">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-down fa-2x"></i></span>
                 </button>
@@ -123,7 +125,7 @@
                   </div>
                   <ng-template #buttonCommentUpvote>
                     <button type="button" class="btn btn-light-secondary buttonLink"
-                      ngbTooltip="Upvote">
+                      ngbTooltip="Upvote" (click)="upVote(comment)">
                       <app-tooltip tooltipClass="tooltip"></app-tooltip><span
                         class="text-secondary"><i class="fa fa-caret-up fa-2x"></i></span>
                     </button>
@@ -140,7 +142,7 @@
                   </div>
                   <ng-template #buttonCommentDownvote>
                     <button type="button" class="btn btn-light-secondary buttonLink"
-                      ngbTooltip="Downvote">
+                      ngbTooltip="Downvote" (click)="downVote(comment)">
                       <app-tooltip tooltipClass="tooltip"></app-tooltip><span
                         class="text-secondary"><i class="fa fa-caret-down fa-2x"></i></span>
                     </button>
@@ -178,12 +180,12 @@
                   </div>
                 </div>
                 <div class="col-sm-12 col-lg-3 col-xl-2">
-                  <button type="button" *ngIf="post && loggedInUserUrl === post.author_url"
+                  <button type="button" *ngIf="post && loggedInUserUrl === comment.author_url"
                     class="btn btn-outline-primary" (click)="openEditComment(comment)">
                     <span class="fa fa-pencil fa-lg"></span>
                   </button>
                   {{' '}}
-                  <button type="button" *ngIf="loggedInUserUrl !== ''"
+                  <button type="button" *ngIf="loggedInUserUrl !== ''" (click)="open(comment)"
                     class="btn btn-outline-primary">
                     <span class="fa fa-trash fa-lg"></span>
                   </button>
@@ -209,4 +211,22 @@
       </div>
     </div>
   </div>
+  <ng-template #confirmation let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Confirmation</h4>
+      <button type="button" class="close" (click)="modal.dismiss()">
+        <span>&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" style="padding-bottom: 0px;">
+      <div class="d-flex justify-content-start">
+        <span>Do you really want to delete the post?</span>
+      </div>
+      <div class="modal-footer rightPadding">
+        <button type="button" class="btn btn-primary"
+          (click)="modal.close(delete(currentComment))">Delete</button>{{' '}}
+        <button type="button" class="btn btn-primary" (click)="modal.dismiss()">Cancel</button>
+      </div>
+    </div>
+  </ng-template>
 </div>

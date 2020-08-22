@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { PostService } from '../../services/post.service';
 import { Post } from '../..//interfaces/post';
 import { Comment } from '../../interfaces/comment';
@@ -21,6 +21,9 @@ export class PostWithCommentsComponent implements OnInit {
   comments: Comment[] = [];
   loggedInUserUrl: string = '/users/2';
   model = "new";
+  currentComment: Comment;
+
+  @ViewChild('confirmation') confirmation: ElementRef;
 
   log = (): void => console.log(this.model);
 
@@ -43,7 +46,13 @@ export class PostWithCommentsComponent implements OnInit {
 
   openEditComment(comment: Comment) {
     const modalRef = this.modal.open(EditCommentComponent, { size: 'lg', centered: true });
-    modalRef.componentInstance.comment = comment;
+    modalRef.componentInstance.comment = Object.assign({}, comment);
+    modalRef.result.then((comment$) => {
+      comment$.subscribe((comment: Comment) => {
+        this.comments = this.comments.filter(c => c.comment_url !== comment.comment_url).concat([comment]);
+      });
+    })
+      .catch(error => console.log(error));
   }
 
   openNewComment() {
@@ -53,13 +62,54 @@ export class PostWithCommentsComponent implements OnInit {
       lastUpdatedAt: null,
       content: null,
       likes: null,
-      author_url: null,
-      post_url: null,
+      author_url: this.loggedInUserUrl,
+      post_url: this.post.post_url,
       comment_url: null,
       option: null,
       authorname: null
     }
     modalRef.componentInstance.newComment = newComment;
+    modalRef.result.then((comment$) => {
+      comment$.subscribe((comment: Comment) => {
+        this.comments = this.comments.concat([comment]);
+        this.post.numberOfComments += 1;
+      });
+    })
+      .catch(error => console.log(error));
   }
 
+  upvote(post: Post) {
+    this.postService.upVote(post).subscribe((p: Post) => {
+      this.post = p;
+    });
+  }
+
+  downvote(post: Post) {
+    this.postService.downVote(post).subscribe((p: Post) => {
+      this.post = p;
+    });
+  }
+
+  upVote(comment: Comment) {
+    this.commentService.upVote(comment).subscribe((c: Comment) => {
+      this.comments = this.comments.filter(c => c.comment_url !== comment.comment_url).concat([c]);
+    });
+  }
+
+  downVote(comment: Comment) {
+    this.commentService.downVote(comment).subscribe((c: Comment) => {
+      this.comments = this.comments.filter(c => c.comment_url !== comment.comment_url).concat([c]);
+    });
+  }
+
+  delete(comment: Comment) {
+    this.commentService.delete(comment).subscribe(() => {
+      this.comments = this.comments.filter(c => c.comment_url !== comment.comment_url);
+      this.post.numberOfComments -= 1;
+    })
+  }
+  open(comment: Comment) {
+    this.modal.open(this.confirmation, { centered: true });
+    this.currentComment = comment;
+  }
 }

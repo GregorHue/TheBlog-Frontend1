@@ -25,3 +25,8 @@
   color: gray;
   background-color: white;
 }
+
+.rightPadding {
+
+  padding-right: 0px;
+}

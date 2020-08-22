@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
 
   openEditPost(post: Post) {
     const modalRef = this.modal.open(EditPostComponent, { size: 'lg', centered: true });
-    modalRef.componentInstance.post = post;
+    modalRef.componentInstance.post = Object.assign({}, post);
     modalRef.result.then((post$) => {
       post$.subscribe((post: Post) => {
         this.posts = this.posts.filter(p => p.post_url !== post.post_url).concat([post]);
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
       content: null,
       likes: null,
       category: null,
-      author_url: null,
+      author_url: this.loggedInUserUrl,
       post_url: null,
       comments_url: null,
       numberOfComments: null,
