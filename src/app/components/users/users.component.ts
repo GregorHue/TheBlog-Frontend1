@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +12,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class UsersComponent implements OnInit {
 
   users: User[] = [];
+  currentUser: User;
+
+  @ViewChild('confirmation') confirmation: ElementRef;
 
   constructor(private userService: UserService, public modal: NgbModal) { }
 
@@ -54,5 +57,15 @@ export class UsersComponent implements OnInit {
     return address;
   }
 
+  delete(user: User) {
+    this.userService.delete(user).subscribe(() => {
+      this.users = this.users.filter(u => u.user_url !== user.user_url);
+      this.userService.updateCacheAfterDelete(user);
+    })
+  }
+  open(user: User) {
+    this.modal.open(this.confirmation, { centered: true });
+    this.currentUser = user;
+  }
 
 }

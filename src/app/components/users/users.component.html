@@ -23,27 +23,27 @@
         <td class="align-middle">{{user.email}}</td>
         <td class="align-middle">{{getCompleteAddress(user)}}</td>
         <td class="align-middle">
-          <button type="button" class="btn btn-outline-primary" (click)="modal.open(modalDelete)">
+          <button type="button" class="btn btn-outline-primary" (click)="open(user)">
             <i class="fa fa-trash fa-lg"></i>
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-  <ng-template #modalDelete>
+  <ng-template #confirmation let-modal>
     <div class="modal-header">
       <h4 class="modal-title">Confirmation!</h4>
-      <button type="button" class="close" (click)="modal.dismissAll()">
+      <button type="button" class="close" (click)="modal.dismiss()">
         <span>&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      Do you really want to delete this post?
+      Do you really want to delete this user?
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-primary"
-        (click)="modal.dismissAll()">Delete</button>{{' '}}
-      <button type="button" class="btn btn-primary" (click)="modal.dismissAll()">Cancel</button>
+        (click)="modal.close(delete(currentUser))">Delete</button>{{' '}}
+      <button type="button" class="btn btn-primary" (click)="modal.dismiss()">Cancel</button>
     </div>
   </ng-template>
 </div>
