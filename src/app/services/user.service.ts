@@ -46,9 +46,13 @@ export class UserService {
       }
     }
     if (!result) {
-      result = this.http.get<User>(`${BASEURL}/users/${userId}`)
+      result = this.http.get<User>(`${BASEURL}/users/${userId}`, this.httpOptions);
     }
     return result;
+  }
+
+  update(user: User): Observable<User> {
+    return this.http.put<User>(`${BASEURL}${user.user_url}`, JSON.stringify(user), this.httpOptions);
   }
 
   delete(user: User): Observable<User> {

@@ -17,7 +17,6 @@ export class ProfileComponent implements OnInit {
   model: User;
   genders = Object.keys(Gender);
   isAlertOpen = false;
-  submitted = false;
 
   constructor(private route: ActivatedRoute,
     private userService: UserService) { }
@@ -35,6 +34,8 @@ export class ProfileComponent implements OnInit {
     this.isAlertOpen = false;
   }
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() {
+    this.userService.update(this.model).subscribe(user => this.model = user);
+  }
 
 }
