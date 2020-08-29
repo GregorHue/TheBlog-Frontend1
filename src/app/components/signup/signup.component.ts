@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.signupService.createSignup(this.newSignup).pipe(catchError(this.errorHandler)).subscribe((signup: Signup) => {
+    this.signupService.signup(this.newSignup).pipe(catchError(this.errorHandler)).subscribe((signup: Signup) => {
       this.isAlertSuccessOpen = true;
       this.successMessage = `Account with username ${signup.username} successfully created!`
     }, (error: any) => {
