@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SignupComponent } from '../components/signup/signup.component';
 import { Signup } from '../interfaces/signup';
+import { LoginComponent } from '../components/login/login.component';
+import { Login } from '../interfaces/login';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +19,7 @@ export class HeaderComponent implements OnInit {
     console.log('clicked');
   }
 
-  constructor(public modal: NgbModal) { }
+  constructor(public modal: NgbModal, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -30,5 +33,18 @@ export class HeaderComponent implements OnInit {
       user_url: null,
     }
     modalRef.componentInstance.newSignup = newSignup;
+  }
+
+  openLogin() {
+    const modalRef = this.modal.open(LoginComponent);
+    let newLogin: Login = {
+      username: null,
+      password: null
+    }
+    modalRef.componentInstance.newLogin = newLogin;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

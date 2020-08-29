@@ -17,6 +17,7 @@ import { NewPostComponent } from './components/new-post/new-post.component';
 import { NewCommentComponent } from './components/new-comment/new-comment.component';
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { SignupComponent } from './components/signup/signup.component';
     NewPostComponent,
     NewCommentComponent,
     EditCommentComponent,
-    SignupComponent
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
