@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { SignupComponent } from '../components/signup/signup.component';
+import { Signup } from '../interfaces/signup';
 
 @Component({
   selector: 'app-header',
@@ -13,9 +16,19 @@ export class HeaderComponent implements OnInit {
     console.log('clicked');
   }
 
-  constructor() { }
+  constructor(public modal: NgbModal) { }
 
   ngOnInit(): void {
   }
 
+  openSignup() {
+    const modalRef = this.modal.open(SignupComponent);
+    let newSignup: Signup = {
+      username: null,
+      password: null,
+      confirmPassword: null,
+      user_url: null,
+    }
+    modalRef.componentInstance.newSignup = newSignup;
+  }
 }
