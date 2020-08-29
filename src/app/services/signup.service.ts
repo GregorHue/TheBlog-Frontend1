@@ -9,7 +9,6 @@ import { BASEURL } from '../utils/baseUrl';
 })
 export class SignupService {
 
-
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -18,7 +17,7 @@ export class SignupService {
 
   constructor(private http: HttpClient) { }
 
-  createSignup(signup: Signup): Observable<Signup> {
+  signup(signup: Signup): Observable<Signup> {
     return this.http.post<Signup>(`${BASEURL}/signup`, JSON.stringify(signup), this.httpOptions);
   }
 }
