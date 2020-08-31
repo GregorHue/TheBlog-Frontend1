@@ -186,8 +186,8 @@
                     <span class="fa fa-pencil fa-lg"></span>
                   </button>
                   {{' '}}
-                  <button type="button" *ngIf="authService.loggedInUserUrl !== ''"
-                    (click)="open(comment)" class="btn btn-outline-primary">
+                  <button type="button" *ngIf="authService.isAdmin" (click)="open(comment)"
+                    class="btn btn-outline-primary">
                     <span class="fa fa-trash fa-lg"></span>
                   </button>
                 </div>
