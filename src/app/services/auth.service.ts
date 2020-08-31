@@ -1,27 +1,62 @@
 import { Injectable } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  token: string = 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsInVzZXJfdXJsIjoiL3VzZXJzLzIiLCJleHAiOjE1OTkwNDk3NDAsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.PwgXtzxRRK-ugbpeWwDwMez6OxdS-GD2tsT9R2Avb0dz9-hlvIHhjDuNqUOJspyW1xOOkninTlYvnFKVsS8iMg';
+  isAdmin = false;
+  loggedInUser = '';
+  loggedInUserUrl = '';
 
-  TOKEN = 'token';
-
-  constructor() {
-    this.saveToken(this.token);
-  }
-
-  saveToken(token: string): void {
-    localStorage.setItem(this.TOKEN, this.token);
-  }
+  constructor(private helper: JwtHelperService) { }
 
   getToken(): string {
-    return localStorage.getItem(this.TOKEN);
+    return localStorage.getItem('token');
+  }
+
+  handleLogin(response: HttpResponse<Object>) {
+    const bearerJwt = this.extractJwt(response);
+    const rawJwt = bearerJwt.split(' ')[1];
+    localStorage.setItem('token', rawJwt);
+    const decodedToken = this.helper.decodeToken(rawJwt);
+    this.isAdmin = this.extractAdmin(decodedToken);
+    this.loggedInUser = decodedToken.sub;
+    this.loggedInUserUrl = decodedToken.user_url;
+  }
+
+  loginAfterRefresh() {
+    const rawJwt = localStorage.getItem('token');
+    const decodedToken = this.helper.decodeToken(rawJwt);
+    this.isAdmin = this.extractAdmin(decodedToken);
+    this.loggedInUser = decodedToken.sub;
+    this.loggedInUserUrl = decodedToken.user_url;
   }
 
   logout() {
     localStorage.removeItem('token');
+    this.loggedInUser = '';
+    this.loggedInUserUrl = '';
+    this.isAdmin = false;
+  }
+
+  private extractJwt(response: HttpResponse<Object>) {
+    var token = null;
+    if (response.headers.has('Authorization')) {
+      token = response.headers.get('Authorization');
+    }
+    return token;
+  };
+
+  private extractAdmin(decodedJwt: any) {
+    const roles = decodedJwt.authorities.split(',');
+    if (roles.includes('ROLE_ADMIN')) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }

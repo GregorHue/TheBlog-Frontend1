@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewCommentComponent } from '../new-comment/new-comment.component';
 import { EditCommentComponent } from '../edit-comment/edit-comment.component';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-post-with-comments',
@@ -19,7 +20,6 @@ export class PostWithCommentsComponent implements OnInit {
 
   post: Post;
   comments: Comment[] = [];
-  loggedInUserUrl: string = '/users/2';
   model = "new";
   currentComment: Comment;
 
@@ -31,6 +31,7 @@ export class PostWithCommentsComponent implements OnInit {
     private route: ActivatedRoute,
     private postService: PostService,
     private commentService: CommentService,
+    public authService: AuthService,
     public modal: NgbModal) { }
 
   ngOnInit(): void {
@@ -62,7 +63,7 @@ export class PostWithCommentsComponent implements OnInit {
       lastUpdatedAt: null,
       content: null,
       likes: null,
-      author_url: this.loggedInUserUrl,
+      author_url: this.authService.loggedInUserUrl,
       post_url: this.post.post_url,
       comment_url: null,
       option: null,

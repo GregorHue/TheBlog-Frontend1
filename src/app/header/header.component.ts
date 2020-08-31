@@ -5,6 +5,7 @@ import { Signup } from '../interfaces/signup';
 import { LoginComponent } from '../components/login/login.component';
 import { Login } from '../interfaces/login';
 import { AuthService } from '../services/auth.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -14,12 +15,11 @@ import { AuthService } from '../services/auth.service';
 export class HeaderComponent implements OnInit {
 
   isCollapsed: boolean = true;
-  loggedInUserUrl = '/users/2';
   log(): void {
     console.log('clicked');
   }
 
-  constructor(public modal: NgbModal, private authService: AuthService) { }
+  constructor(public modal: NgbModal, public authService: AuthService, private userService: UserService) { }
 
   ngOnInit(): void {
   }
@@ -46,5 +46,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.userService.clearCache();
   }
 }

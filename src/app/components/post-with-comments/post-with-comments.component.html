@@ -18,7 +18,7 @@
           </div>
           <div class="row d-flex">
             <div class="col-1 align-self-center text-center">
-              <div *ngIf="loggedInUserUrl === ''; else buttonPostUpvote">
+              <div *ngIf="authService.loggedInUserUrl === ''; else buttonPostUpvote">
                 <button type="button" class="btn buttonLink"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
@@ -35,7 +35,7 @@
               <div>
                 <h5>{{post.likes}}</h5>
               </div>
-              <div *ngIf="loggedInUserUrl === ''; else buttonPostDownvote">
+              <div *ngIf="authService.loggedInUserUrl === ''; else buttonPostDownvote">
                 <button type="button" class="btn buttonLink"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
@@ -58,7 +58,7 @@
           </div>
           <div class="row">
             <div class="col-lg-4 mt-2">
-              <div *ngIf="loggedInUserUrl !== ''; else badge">
+              <div *ngIf="authService.loggedInUserUrl !== ''; else badge">
                 <button type="button" class="btn btn-outline-primary" ngbTooltip="New comment"
                   (click)="openNewComment()">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span><i
@@ -66,7 +66,7 @@
                 </button>
               </div>
               <ng-template #badge>
-                <div class="badge badge-light" style="font-size: 14; font-weight: normal;">
+                <div class="badge badge-light" style="font-size: 14px; font-weight: normal;">
                   Login or signup for a comment
                 </div>
               </ng-template>
@@ -116,7 +116,7 @@
             <div class="card-body" style="padding-bottom: 10; padding-top: 5">
               <div class="row  d-flex">
                 <div class="col-1 align-self-center text-center">
-                  <div *ngIf="loggedInUserUrl === ''; else buttonCommentUpvote">
+                  <div *ngIf="authService.loggedInUserUrl === ''; else buttonCommentUpvote">
                     <button type="button" class="btn btn-light-secondary buttonLink"
                       ngbTooltip="Login or signup for voting">
                       <app-tooltip tooltipClass="tooltip"></app-tooltip><span
@@ -133,7 +133,7 @@
                   <div>
                     <h5>{{comment.likes}}</h5>
                   </div>
-                  <div *ngIf="loggedInUserUrl === ''; else buttonCommentDownvote">
+                  <div *ngIf="authService.loggedInUserUrl === ''; else buttonCommentDownvote">
                     <button type="button" class="btn btn-light-secondary buttonLink"
                       ngbTooltip="Login or signup for voting">
                       <app-tooltip tooltipClass="tooltip"></app-tooltip><span
@@ -180,13 +180,14 @@
                   </div>
                 </div>
                 <div class="col-sm-12 col-lg-3 col-xl-2">
-                  <button type="button" *ngIf="post && loggedInUserUrl === comment.author_url"
+                  <button type="button"
+                    *ngIf="post && authService.loggedInUserUrl === comment.author_url"
                     class="btn btn-outline-primary" (click)="openEditComment(comment)">
                     <span class="fa fa-pencil fa-lg"></span>
                   </button>
                   {{' '}}
-                  <button type="button" *ngIf="loggedInUserUrl !== ''" (click)="open(comment)"
-                    class="btn btn-outline-primary">
+                  <button type="button" *ngIf="authService.loggedInUserUrl !== ''"
+                    (click)="open(comment)" class="btn btn-outline-primary">
                     <span class="fa fa-trash fa-lg"></span>
                   </button>
                 </div>

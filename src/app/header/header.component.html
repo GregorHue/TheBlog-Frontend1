@@ -16,21 +16,22 @@
               [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-users fa-lg"></i>Users</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-light" [routerLink]="loggedInUserUrl" routerLinkActive="active"
-              [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-user fa-lg"></i>Profile</a>
+            <a class="nav-link text-light" [routerLink]="authService.loggedInUserUrl"
+              routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i
+                class="fa fa-user fa-lg"></i>Profile</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mr-3">
-            <a class="nav-link text-white" href="#" (click)="openSignup()"><i
+            <a class="nav-link text-white" [routerLink]="" (click)="openSignup()"><i
                 class="fa fa-user-plus fa-lg" (click)="openSignup()"></i>Signup</a>
           </li>
           <li class="nav-item mr-3">
-            <a class="nav-link text-white" href="#" (click)="openLogin()"><i
+            <a class="nav-link text-white" [routerLink]="" (click)="openLogin()"><i
                 class="fa fa-sign-in fa-lg"></i>Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-white" href="#" (click)="logout()"><i
+            <a class="nav-link text-white" [routerLink]="" (click)="logout()"><i
                 class="fa fa-sign-out fa-lg"></i>Logout</a>
           </li>
         </ul>
