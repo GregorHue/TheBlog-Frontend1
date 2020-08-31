@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { User } from '../../interfaces/user';
 import { UserService } from '../../services/user.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -16,7 +17,8 @@ export class UsersComponent implements OnInit {
 
   @ViewChild('confirmation') confirmation: ElementRef;
 
-  constructor(private userService: UserService, public modal: NgbModal) { }
+  constructor(private userService: UserService, public modal: NgbModal) {
+  }
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(users => this.users = users, error => console.log(error));

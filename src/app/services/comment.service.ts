@@ -11,12 +11,6 @@ import { AuthService } from './auth.service';
 })
 export class CommentService {
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authService.getToken()
-    })
-  };
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.http = http;
@@ -28,22 +22,22 @@ export class CommentService {
   }
 
   create(comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(`${BASEURL}/comments`, JSON.stringify(comment), this.httpOptions);
+    return this.http.post<Comment>(`${BASEURL}/comments`, JSON.stringify(comment));
   }
 
   update(comment: Comment): Observable<Comment> {
-    return this.http.put<Comment>(`${BASEURL}${comment.comment_url}`, JSON.stringify(comment), this.httpOptions);
+    return this.http.put<Comment>(`${BASEURL}${comment.comment_url}`, JSON.stringify(comment));
   }
 
   upVote(comment: Comment): Observable<Comment> {
-    return this.http.patch<Comment>(`${BASEURL}${comment.comment_url}`, JSON.stringify({ option: "upVote" }), this.httpOptions);
+    return this.http.patch<Comment>(`${BASEURL}${comment.comment_url}`, JSON.stringify({ option: "upVote" }));
   }
 
   downVote(comment: Comment): Observable<Comment> {
-    return this.http.patch<Comment>(`${BASEURL}${comment.comment_url}`, JSON.stringify({ option: "downVote" }), this.httpOptions);
+    return this.http.patch<Comment>(`${BASEURL}${comment.comment_url}`, JSON.stringify({ option: "downVote" }));
   }
 
   delete(comment: Comment): Observable<Comment> {
-    return this.http.delete<Comment>(`${BASEURL}${comment.comment_url}`, this.httpOptions);
+    return this.http.delete<Comment>(`${BASEURL}${comment.comment_url}`);
   }
 }

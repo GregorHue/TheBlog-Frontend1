@@ -32,7 +32,8 @@ export class SignupComponent implements OnInit {
   onSubmit(): void {
     this.signupService.signup(this.newSignup).pipe(catchError(this.errorHandler)).subscribe((signup: Signup) => {
       this.isAlertSuccessOpen = true;
-      this.successMessage = `Account with username ${signup.username} successfully created!`
+      this.successMessage = `Account with username ${signup.username} successfully created!`;
+      setTimeout(() => this.activeModal.close(), 2000);
     }, (error: any) => {
       this.isAlertFailureOpen = true;
       this.errorMessage = error.message;

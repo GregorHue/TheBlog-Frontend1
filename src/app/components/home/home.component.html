@@ -1,9 +1,8 @@
 <div class="container">
   <h3 class="text-center">Posts
     <button type="button" class="btn button-outline-secondary border-secondary switch"
-      (click)="openNewPost()"
-      *ngIf="loggedInUserUrl && loggedInUserUrl.length > 0; else badgeLogin">New
-      Post</button>
+      (click)="openNewPost()" *ngIf="authService.loggedInUserUrl.length > 0; 
+      else badgeLogin">New Post</button>
     <ng-template #badgeLogin>
       <span class="badge badge-light" style="font-size: medium; font-weight: normal">Login or
         signup for a post
@@ -24,7 +23,8 @@
           <div class="row">
             <div class="col-1 align-self-center text-center">
               <button type="button" class="btn buttonLink" ngbTooltip="Upvote"
-                *ngIf="loggedInUserUrl.length > 0; else buttonUpvote" (click)="upVote(post)">
+                *ngIf="authService.loggedInUserUrl.length > 0; else buttonUpvote"
+                (click)="upVote(post)">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                     class="fa fa-caret-up fa-2x"></i></span>
               </button>
@@ -39,7 +39,8 @@
                 <h5>{{post.likes}}</h5>
               </div>
               <button type="button" class="btn buttonLink" ngbTooltip="Downvote"
-                *ngIf="loggedInUserUrl.length > 0; else buttonDownvote" (click)="downVote(post)">
+                *ngIf="authService.loggedInUserUrl.length > 0; else buttonDownvote"
+                (click)="downVote(post)">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                     class="fa fa-caret-down fa-2x"></i></span>
               </button>
@@ -90,13 +91,13 @@
               </div>
             </div>
             <div class="col-sm-12 col-lg-3 col-xl-2">
-              <button type="button" *ngIf="loggedInUserUrl === post.author_url"
+              <button type="button" *ngIf="authService.loggedInUserUrl === post.author_url"
                 (click)=openEditPost(post) class="btn btn-outline-primary" style="margin-top: 7px;">
                 <span class="fa fa-pencil fa-lg"></span>
               </button>
               {{' '}}
-              <button type="button" *ngIf="loggedInUserUrl !== ''" class="btn btn-outline-primary"
-                (click)="open(post)" style="margin-top: 7px;">
+              <button type="button" *ngIf="authService.loggedInUserUrl !== ''"
+                class="btn btn-outline-primary" (click)="open(post)" style="margin-top: 7px;">
                 <span class="fa fa-trash fa-lg"></span>
               </button>
             </div>

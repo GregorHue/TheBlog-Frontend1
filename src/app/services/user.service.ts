@@ -16,22 +16,14 @@ export class UserService {
 
   cache$: Observable<User[]>;
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authService.getToken()
-    })
-  };
-
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
   getUsers(): Observable<User[]> {
 
     if (!this.cache$) {
-      this.cache$ = this.http.get<UserDtoList>(`${BASEURL}/users`, this.httpOptions).pipe(map<UserDtoList, User[]>(list => list.users.filter(user => user.deletedTs == null)), shareReplay(1));
+      this.cache$ = this.http.get<UserDtoList>(`${BASEURL}/users`).pipe(map<UserDtoList, User[]>(list => list.users.filter(user => user.deletedTs == null)), shareReplay(1));
     }
-    this.cache$ = this.cache$.pipe()
     return this.cache$;
 
   }
@@ -46,20 +38,24 @@ export class UserService {
       }
     }
     if (!result) {
-      result = this.http.get<User>(`${BASEURL}/users/${userId}`, this.httpOptions);
+      result = this.http.get<User>(`${BASEURL}/users/${userId}`);
     }
     return result;
   }
 
   update(user: User): Observable<User> {
-    return this.http.put<User>(`${BASEURL}${user.user_url}`, JSON.stringify(user), this.httpOptions);
+    return this.http.put<User>(`${BASEURL}${user.user_url}`, JSON.stringify(user));
   }
 
   delete(user: User): Observable<User> {
-    return this.http.delete<User>(`${BASEURL}${user.user_url}`, this.httpOptions);
+    return this.http.delete<User>(`${BASEURL}${user.user_url}`);
   }
 
   updateCacheAfterDelete(user: User) {
     this.cache$ = this.cache$.pipe(map(cache => cache.filter(u => u.user_url !== user.user_url)));
+  }
+
+  clearCache() {
+    this.cache$ = null;
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Login } from '../interfaces/login';
 import { Observable } from 'rxjs';
 import { BASEURL } from '../utils/baseUrl';
@@ -12,7 +12,10 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  login(login: Login): Observable<Login> {
-    return this.http.post<Login>(`${BASEURL}/login`, JSON.stringify(login));
+
+  login(login: Login): Observable<HttpResponse<Object>> {
+    return this.http.post<Object>(`${BASEURL}/login`, JSON.stringify(login), {
+      observe: "response"
+    });
   }
 }
