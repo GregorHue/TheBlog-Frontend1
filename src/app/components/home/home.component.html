@@ -96,8 +96,8 @@
                 <span class="fa fa-pencil fa-lg"></span>
               </button>
               {{' '}}
-              <button type="button" *ngIf="authService.loggedInUserUrl !== ''"
-                class="btn btn-outline-primary" (click)="open(post)" style="margin-top: 7px;">
+              <button type="button" *ngIf="authService.isAdmin" class="btn btn-outline-primary"
+                (click)="open(post)" style="margin-top: 7px;">
                 <span class="fa fa-trash fa-lg"></span>
               </button>
             </div>

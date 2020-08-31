@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PostWithCommentsComponent } from './components/post-with-comments/post-with-comments.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { UsersComponent } from './components/users/users.component';
+import { RouteGuardService } from './services/route-guard.service';
 
 
 const routes: Routes = [
@@ -21,11 +22,19 @@ const routes: Routes = [
     path: 'users/:userId',
     pathMatch: 'full',
     component: ProfileComponent,
+    canActivate: [RouteGuardService],
+    data: {
+      name: 'profile'
+    }
   },
   {
     path: 'users',
     pathMatch: 'full',
     component: UsersComponent,
+    canActivate: [RouteGuardService],
+    data: {
+      name: 'users'
+    }
   },
   {
     path: '**',

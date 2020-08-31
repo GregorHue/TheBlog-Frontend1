@@ -11,26 +11,26 @@
             <a class="nav-link text-white" [routerLink]="'/home'" routerLinkActive="text-light"><i
                 class="fa fa-home fa-lg"></i>Home</a>
           </li>
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3" *ngIf="authService.isAdmin">
             <a class="nav-link text-white" [routerLink]="'/users'" routerLinkActive="text-light"
               [routerLinkActiveOptions]="{exact: true}"><i class="fa fa-users fa-lg"></i>Users</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="authService.loggedInUserUrl !==''">
             <a class="nav-link text-light" [routerLink]="authService.loggedInUserUrl"
               routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><i
                 class="fa fa-user fa-lg"></i>Profile</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3" *ngIf="authService.loggedInUserUrl ===''">
             <a class="nav-link text-white" [routerLink]="" (click)="openSignup()"><i
                 class="fa fa-user-plus fa-lg" (click)="openSignup()"></i>Signup</a>
           </li>
-          <li class="nav-item mr-3">
+          <li class="nav-item mr-3" *ngIf="authService.loggedInUserUrl ===''">
             <a class="nav-link text-white" [routerLink]="" (click)="openLogin()"><i
                 class="fa fa-sign-in fa-lg"></i>Login</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="authService.loggedInUserUrl !==''">
             <a class="nav-link text-white" [routerLink]="" (click)="logout()"><i
                 class="fa fa-sign-out fa-lg"></i>Logout</a>
           </li>

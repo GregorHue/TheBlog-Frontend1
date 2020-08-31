@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -35,11 +36,15 @@ export class AuthService {
     this.loggedInUserUrl = decodedToken.user_url;
   }
 
-  logout() {
+  logout(router: Router) {
     localStorage.removeItem('token');
     this.loggedInUser = '';
     this.loggedInUserUrl = '';
     this.isAdmin = false;
+    const route: RouterStateSnapshot = router.routerState.snapshot;
+    if (route.url.startsWith('/users')) {
+      router.navigate(['home']);
+    }
   }
 
   private extractJwt(response: HttpResponse<Object>) {

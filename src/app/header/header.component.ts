@@ -6,6 +6,7 @@ import { LoginComponent } from '../components/login/login.component';
 import { Login } from '../interfaces/login';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -15,11 +16,8 @@ import { UserService } from '../services/user.service';
 export class HeaderComponent implements OnInit {
 
   isCollapsed: boolean = true;
-  log(): void {
-    console.log('clicked');
-  }
 
-  constructor(public modal: NgbModal, public authService: AuthService, private userService: UserService) { }
+  constructor(public modal: NgbModal, public authService: AuthService, private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -45,7 +43,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.logout(this.router);
     this.userService.clearCache();
   }
 }
