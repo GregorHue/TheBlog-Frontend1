@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BASEURL } from './utils/baseUrl';
+import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -53,6 +54,7 @@ export function tokenGetter() {
     AppRoutingModule,
     FormsModule,
     NgbModule,
+    OverlayscrollbarsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
