@@ -14,13 +14,6 @@ export class PostService {
 
   cache$: Observable<Post[]>;
 
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.authService.getToken()
-    })
-  };
-
   constructor(private http: HttpClient, private authService: AuthService) {
   }
 
@@ -47,7 +40,7 @@ export class PostService {
   }
 
   create(post: Post): Observable<Post> {
-    return this.http.post<Post>(`${BASEURL}/posts`, JSON.stringify(post), this.httpOptions);
+    return this.http.post<Post>(`${BASEURL}/posts`, JSON.stringify(post));
   }
 
   updateCacheAfterCreate(post: Post) {
@@ -55,7 +48,7 @@ export class PostService {
   }
 
   update(post: Post): Observable<Post> {
-    return this.http.put<Post>(`${BASEURL}${post.post_url}`, JSON.stringify(post), this.httpOptions);
+    return this.http.put<Post>(`${BASEURL}${post.post_url}`, JSON.stringify(post));
   }
 
   updateCacheAfterUpdate(post: Post) {
@@ -63,15 +56,15 @@ export class PostService {
   }
 
   upVote(post: Post): Observable<Post> {
-    return this.http.patch<Post>(`${BASEURL}${post.post_url}`, JSON.stringify({ option: "upVote" }), this.httpOptions);
+    return this.http.patch<Post>(`${BASEURL}${post.post_url}`, JSON.stringify({ option: "upVote" }));
   }
 
   downVote(post: Post): Observable<Post> {
-    return this.http.patch<Post>(`${BASEURL}${post.post_url}`, JSON.stringify({ option: "downVote" }), this.httpOptions);
+    return this.http.patch<Post>(`${BASEURL}${post.post_url}`, JSON.stringify({ option: "downVote" }));
   }
 
   delete(post: Post): Observable<Post> {
-    return this.http.delete<Post>(`${BASEURL}${post.post_url}`, this.httpOptions);
+    return this.http.delete<Post>(`${BASEURL}${post.post_url}`);
   }
 
   updateCacheAfterDelete(post: Post) {
