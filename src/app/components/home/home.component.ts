@@ -20,19 +20,11 @@ export class HomeComponent implements OnInit {
   posts: Post[] = [];
   categories: Category[] = [];
   categoryNames: string[] = [];
-  modelSort = "newest";
-  modelCategory = "All";
+  comparator = "newest";
+  filter = "All";
   currentPost: Post;
 
   @ViewChild('confirmation') confirmation: ElementRef;
-
-  logSort(): void {
-    console.log(this.modelSort);
-  }
-
-  logCategory(): void {
-    console.log(this.modelCategory);
-  }
 
   constructor(
     private postService: PostService,
