@@ -7,9 +7,10 @@ jobs:
       - image: "cimg/base:stable"
     steps:
       - checkout
-      - node/install-packages
-      - run:
-          command: npm run test
+      - node/with-cache:
+          steps:
+            - run: npm install
+            - run: npm test
 workflows:
   test_my_app:
     jobs: [test]
