@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditPostComponent } from './edit-post.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('EditPostComponent', () => {
   let component: EditPostComponent;
@@ -8,9 +9,10 @@ describe('EditPostComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EditPostComponent ]
+      declarations: [EditPostComponent],
+      imports: [AppModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

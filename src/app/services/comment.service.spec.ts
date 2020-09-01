@@ -1,12 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CommentService } from './comment.service';
+import { AppModule } from '../app.module';
 
 describe('CommentService', () => {
   let service: CommentService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      imports: [AppModule]
+    });
     service = TestBed.inject(CommentService);
   });
 

@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from 'src/app/interfaces/post';
 import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-edit-post',
   templateUrl: './edit-post.component.html',
-  styleUrls: ['./edit-post.component.css']
+  styleUrls: ['./edit-post.component.css'],
+  providers: [NgbModal]
 })
 export class EditPostComponent implements OnInit {
 
