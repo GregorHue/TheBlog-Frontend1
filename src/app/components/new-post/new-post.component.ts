@@ -20,8 +20,10 @@ export class NewPostComponent implements OnInit {
   constructor(public activeModal: NgbActiveModal, private categoryService: CategoryService, private postService: PostService) { }
 
   ngOnInit(): void {
-    this.categoryService.getCategories().subscribe(categories => this.categories = categories);
-    this.displayedCategories = this.categories.filter(category => category.name !== 'All').map(category => category.name);
+    this.categoryService.getCategories().subscribe(categories => {
+      this.categories = categories;
+      this.displayedCategories = this.categories.filter(category => category.name !== 'All').map(category => category.name)
+    });
   }
 
   onSubmit(): void {

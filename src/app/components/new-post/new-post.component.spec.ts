@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NewPostComponent } from './new-post.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('NewPostComponent', () => {
   let component: NewPostComponent;
@@ -8,9 +9,10 @@ describe('NewPostComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewPostComponent ]
+      declarations: [NewPostComponent],
+      imports: [AppModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

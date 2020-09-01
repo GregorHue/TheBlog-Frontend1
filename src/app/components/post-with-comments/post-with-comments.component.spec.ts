@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PostWithCommentsComponent } from './post-with-comments.component';
+import { AppModule } from 'src/app/app.module';
 
 describe('PostWithCommentsComponent', () => {
   let component: PostWithCommentsComponent;
@@ -8,9 +9,10 @@ describe('PostWithCommentsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PostWithCommentsComponent ]
+      declarations: [PostWithCommentsComponent],
+      imports: [AppModule]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
