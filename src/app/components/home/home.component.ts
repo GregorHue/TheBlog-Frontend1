@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
   posts: Post[] = [];
   categories: Category[] = [];
   categoryNames: string[] = [];
-  modelSort = "new";
+  modelSort = "newest";
   modelCategory = "All";
   currentPost: Post;
 

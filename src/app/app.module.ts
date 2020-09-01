@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BASEURL } from './utils/baseUrl';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +19,7 @@ import { NewCommentComponent } from './components/new-comment/new-comment.compon
 import { EditCommentComponent } from './components/edit-comment/edit-comment.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
+import { CustomInterceptor } from './interceptors/http-interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -49,12 +50,12 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:8080'],
-        disallowedRoutes: [`${BASEURL}/login`, `${BASEURL}/signup`],
+        whitelistedDomains: ['localhost:8080'],
+        blacklistedRoutes: [`${BASEURL}/login`, `${BASEURL}/signup`],
       },
     })
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: CustomInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
