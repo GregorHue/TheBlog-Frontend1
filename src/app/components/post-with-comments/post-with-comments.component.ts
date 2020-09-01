@@ -20,12 +20,10 @@ export class PostWithCommentsComponent implements OnInit {
 
   post: Post;
   comments: Comment[] = [];
-  model = "new";
+  comparator = "newest";
   currentComment: Comment;
 
   @ViewChild('confirmation') confirmation: ElementRef;
-
-  log = (): void => console.log(this.model);
 
   constructor(
     private route: ActivatedRoute,

@@ -20,6 +20,9 @@ import { EditCommentComponent } from './components/edit-comment/edit-comment.com
 import { SignupComponent } from './components/signup/signup.component';
 import { LoginComponent } from './components/login/login.component';
 import { CustomInterceptor } from './interceptors/http-interceptor';
+import { FilterPipe } from './pipes/filter.pipe';
+import { SortPostByPipe } from './pipes/sort-post-by.pipe';
+import { SortCommentByPipe } from './pipes/sort-comment-by.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -39,7 +42,10 @@ export function tokenGetter() {
     NewCommentComponent,
     EditCommentComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    FilterPipe,
+    SortPostByPipe,
+    SortCommentByPipe
   ],
   imports: [
     BrowserModule,
