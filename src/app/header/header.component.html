@@ -21,6 +21,9 @@
                 class="fa fa-user fa-lg"></i>Profile</a>
           </li>
         </ul>
+        <span *ngIf="authService.loggedInUser !== ''" style="margin-left: 40px;color: white;">
+          Logged in as {{authService.loggedInUser}}
+        </span>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mr-3" *ngIf="authService.loggedInUserUrl ===''">
             <a class="nav-link text-white" [routerLink]="" (click)="openSignup()"><i
