@@ -4,7 +4,9 @@ orbs:
 jobs:
   test:
     docker:
-      - image: "cimg/base:stable"
+      - image: "cimg/base:stable-node-browsers "
+        environment:
+          CHROME_BIN: "/usr/bin/google-chrome"
     steps:
       - checkout
       - node/install
