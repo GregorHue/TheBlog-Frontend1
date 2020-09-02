@@ -1,3 +1,7 @@
+| Build Status  | 
+|---|
+|[![CircleCI](https://circleci.com/gh/GregorHue/TheBlog-Angular.svg?style=svg&circle-token=5cacc42554d1f896a9d8036f4a1bc6cf76b95225)](https://circleci.com/gh/GregorHue/TheBlog-Angular)|
+
 # TheBlog-Angular
 
 This project was bootstrapped with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
