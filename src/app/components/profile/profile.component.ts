@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { ActivatedRoute, Params } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute, Params, ParamMap } from '@angular/router';
+import { switchMap, mergeMap, flatMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/interfaces/user';
 import { Gender } from 'src/app/interfaces/gender';
@@ -22,13 +22,9 @@ export class ProfileComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit(): void {
-    this.route.params.pipe(switchMap((params: Params) => {
-      return params['userId'] as Observable<number>;
-    })).subscribe(userId => {
-      this.userService.getUser(userId).subscribe(user => this.model = user, error => console.log(error))
-    }, error => console.log(error));
-
+    this.route.paramMap.pipe(map((parameterMap: ParamMap) => +parameterMap.get('userId'))).pipe(flatMap(userId => this.userService.getUser(userId))).subscribe(user => this.model = user);
   }
+
 
   closeAlert(): void {
     this.isAlertOpen = false;

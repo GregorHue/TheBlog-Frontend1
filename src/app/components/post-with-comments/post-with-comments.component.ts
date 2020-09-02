@@ -3,8 +3,8 @@ import { PostService } from '../../services/post.service';
 import { Post } from '../..//interfaces/post';
 import { Comment } from '../../interfaces/comment';
 import { CommentService } from 'src/app/services/comment.service';
-import { Params, ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { Params, ActivatedRoute, ParamMap } from '@angular/router';
+import { switchMap, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewCommentComponent } from '../new-comment/new-comment.component';
@@ -33,14 +33,11 @@ export class PostWithCommentsComponent implements OnInit {
     public modal: NgbModal) { }
 
   ngOnInit(): void {
-
-    this.route.params.pipe(switchMap((params: Params) => {
-      return params['postId'] as Observable<number>;
-    })).subscribe(postId => {
-      this.postService.getPost(postId).subscribe(post => this.post = post, error => console.log(error));
-      this.commentService.getCommentsByPost(postId).subscribe(comments => this.comments = comments, error => console.log(error));
-    }, (error: any) => console.log(error));
-
+    this.route.paramMap.pipe(map((parameterMap: ParamMap) => +parameterMap.get('postId')))
+      .subscribe(postId => {
+        this.postService.getPost(postId).subscribe(post => this.post = post);
+        this.commentService.getCommentsByPost(postId).subscribe(comments => this.comments = comments);
+      });
   }
 
   openEditComment(comment: Comment) {

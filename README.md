@@ -4,28 +4,67 @@
 
 # TheBlog-Angular
 
-This project was bootstrapped with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.9.
+An Angular frontend for a demo blog. The backend API server which is used to interact with this frontend can be downloaded from
+[here](https://github.com/GregorHue/TheBlog-API).
 
-## Development server
+## Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+As a prerequisite Node in version 8.9 or higher and npm in version 5.5.1 or higher have to be installed on your computer.
 
-## Code scaffolding
+## Installation 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Download or copy the repository into a directory of your choice. Change into this directory, possibly unzip the content and
 
-## Build
+type on the command line:
+   
+* `npm install`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Run
 
-## Running unit tests
+In order to run the application type on the command line:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+*  `ng serve` oder `npm start`
 
-## Running end-to-end tests
+The development server will serve the application on `http://localhost:4200`.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Functionality
+This application is the frontend portion of a blog. It provides the common functionality of a blog and includes a roles-based user 
+management. 
 
-## Further help
+In detail:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+* An anonymous user can read posts and comments.
+
+* A logged-in user can write posts and comments.
+
+* A logged-in user can vote on posts and comments.
+
+* Only the user himself can edit his user profile.
+
+* Only the author of a post or a comment (and the admin) can edit the post or comment, respectivly.
+
+* Only the admin can delete a post, a comment or a user.
+
+* Only the admin can look at the list of users.
+
+* Two predifined users:
+
+  * username `user` with password `user` and role `ROLE_USER`
+  
+  * username `admin` with password `admin` and `ROLE_ADMIN`
+
+* A new user can signup by hitting the endpoint `localhost:3000/signup` with chosen username and password.
+
+* A user can login by hitting the endpoint `localhost:3000/login` with valid credentials. 
+ 
+## Technology
+
+* Angular application
+
+* Bootstrapped with angular-cli
+
+* State management by services with caching and memoization
+
+* Autorisation and authorization with JSON web token
+
+* Responsive application with Bootstrap framework
