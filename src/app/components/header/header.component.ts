@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SignupComponent } from '../components/signup/signup.component';
-import { Signup } from '../interfaces/signup';
-import { LoginComponent } from '../components/login/login.component';
-import { Login } from '../interfaces/login';
-import { AuthService } from '../services/auth.service';
-import { UserService } from '../services/user.service';
+import { SignupComponent } from '../signup/signup.component';
+import { Signup } from '../../interfaces/signup';
+import { LoginComponent } from '../login/login.component';
+import { Login } from '../../interfaces/login';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 
 @Component({
