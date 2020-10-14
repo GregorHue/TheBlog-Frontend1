@@ -39,14 +39,14 @@
               <div>
                 <h5>{{post.likes}}</h5>
               </div>
-              <button type="button" class="btn buttonLink" ngbTooltip="Downvote"
+              <button type="button" class="btn buttonLink" ngbTooltip="Downvote" placement="right"
                 *ngIf="authService.loggedInUserUrl.length > 0; else buttonDownvote"
                 (click)="downVote(post)">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                     class="fa fa-caret-down fa-2x"></i></span>
               </button>
               <ng-template #buttonDownvote>
-                <button type="button" class="btn buttonLink"
+                <button type="button" class="btn buttonLink" placement="right"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-down fa-2x"></i></span>
@@ -62,7 +62,7 @@
           <div class="row">
             <div class="col-sm-3 mt-2">
               <a [routerLink]="post.post_url + '/comments'" class="btn btn-outline-primary"
-                ngbTooltip="Show comments">
+                ngbTooltip="Show comments" placement="right">
                 <app-tooltip tooltipClass="tooltip"></app-tooltip>
                 <span class="fa fa-comments fa-lg"></span>
               </a>
