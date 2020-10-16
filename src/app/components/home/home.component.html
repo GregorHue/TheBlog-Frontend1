@@ -30,7 +30,7 @@
                     class="fa fa-caret-up fa-2x"></i></span>
               </button>
               <ng-template #buttonUpvote>
-                <button type="button" class="btn buttonLink"
+                <button type="button" class="btn buttonLink" (click)="showVoteToast=true"
                   ngbTooltip="Login or signup for voting">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-up fa-2x"></i></span>
@@ -47,7 +47,7 @@
               </button>
               <ng-template #buttonDownvote>
                 <button type="button" class="btn buttonLink" placement="right"
-                  ngbTooltip="Login or signup for voting">
+                  ngbTooltip="Login or signup for voting" (click)="showVoteToast=true">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-down fa-2x"></i></span>
                 </button>
@@ -147,4 +147,11 @@
         </div>
       </div>
     </ng-template>
+    <ngb-toast [delay]="3000" *ngIf="showVoteToast" class="bg-warning" (hide)="showVoteToast=false">
+      <ng-template ngbToastHeader>
+        <i class="fa fa-exclamation-circle"></i>
+        &nbsp;Info
+      </ng-template>
+      Signup or login to leave a vote
+    </ngb-toast>
   </div>

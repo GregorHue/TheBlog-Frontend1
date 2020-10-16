@@ -20,7 +20,7 @@
             <div class="col-1 align-self-center text-center">
               <div *ngIf="authService.loggedInUserUrl === ''; else buttonPostUpvote">
                 <button type="button" class="btn buttonLink" placement="right"
-                  ngbTooltip="Login or signup for voting">
+                  ngbTooltip="Login or signup for voting" (click)="showVoteToast=true">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-up fa-2x"></i></span>
                 </button>
@@ -37,7 +37,7 @@
               </div>
               <div *ngIf="authService.loggedInUserUrl === ''; else buttonPostDownvote">
                 <button type="button" class="btn buttonLink" placement="right"
-                  ngbTooltip="Login or signup for voting">
+                  ngbTooltip="Login or signup for voting" (click)="showVoteToast=true">
                   <app-tooltip tooltipClass="tooltip"></app-tooltip><span class="text-secondary"><i
                       class="fa fa-caret-down fa-2x"></i></span>
                 </button>
@@ -118,7 +118,7 @@
                 <div class="col-1 align-self-center text-center">
                   <div *ngIf="authService.loggedInUserUrl === ''; else buttonCommentUpvote">
                     <button type="button" class="btn btn-light-secondary buttonLink"
-                      ngbTooltip="Login or signup for voting">
+                      ngbTooltip="Login or signup for voting" (click)="showVoteToast=true">
                       <app-tooltip tooltipClass="tooltip"></app-tooltip><span
                         class="text-secondary"><i class="fa fa-caret-up fa-2x"></i></span>
                     </button>
@@ -135,7 +135,8 @@
                   </div>
                   <div *ngIf="authService.loggedInUserUrl === ''; else buttonCommentDownvote">
                     <button type="button" class="btn btn-light-secondary buttonLink"
-                      ngbTooltip="Login or signup for voting" placement="bottom">
+                      ngbTooltip="Login or signup for voting" placement="bottom"
+                      (click)="showVoteToast=true">
                       <app-tooltip tooltipClass="tooltip"></app-tooltip><span
                         class="text-secondary"><i class="fa fa-caret-down fa-2x"></i></span>
                     </button>
@@ -230,4 +231,11 @@
       </div>
     </div>
   </ng-template>
+  <ngb-toast [delay]="3000" *ngIf="showVoteToast" class="bg-warning" (hide)="showVoteToast=false">
+    <ng-template ngbToastHeader>
+      <i class="fa fa-exclamation-circle"></i>
+      &nbsp;Info
+    </ng-template>
+    Signup or login to leave a vote
+  </ngb-toast>
 </div>

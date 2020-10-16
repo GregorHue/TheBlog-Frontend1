@@ -22,6 +22,7 @@ export class PostWithCommentsComponent implements OnInit {
   comments: Comment[] = [];
   comparator = "newest";
   currentComment: Comment;
+  showVoteToast = false;
 
   @ViewChild('confirmation') confirmation: ElementRef;
 

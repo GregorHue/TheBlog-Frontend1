@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   comparator = "newest";
   filter = "All";
   currentPost: Post;
+  showVoteToast = false;
 
   @ViewChild('confirmation') confirmation: ElementRef;
 
