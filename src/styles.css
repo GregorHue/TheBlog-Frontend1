@@ -21,8 +21,8 @@ code {
 
 
 ngb-toast.toast.show {
-  position: absolute;
+  position: fixed;
   left: 50%;
-  top: 50%
+  top: 50%;
 }
 
