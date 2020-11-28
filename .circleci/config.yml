@@ -9,8 +9,8 @@ jobs:
           CHROME_BIN: "/usr/bin/google-chrome"
     steps:
       - checkout
-      - node/install
-      - node/install-packages
+      - run:
+          command: npm install
       - run:
           command: npm run test
 workflows:
