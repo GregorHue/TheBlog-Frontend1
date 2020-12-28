@@ -13,6 +13,7 @@ export interface Post {
   post_url: string,
   comments_url: string,
   numberOfComments: number,
+  image: string,
   option: Vote,
   authorname: string
 }

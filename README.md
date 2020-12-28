@@ -63,8 +63,8 @@ In detail:
 
 * Bootstrapped with angular-cli
 
-* State management by services with caching and memoization
+* State management in services with caching and memoization
 
 * Autorisation and authorization with JSON web token
 
-* Responsive application with Bootstrap framework
+* Responsive UI with Bootstrap 
