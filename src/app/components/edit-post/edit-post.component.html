@@ -7,14 +7,33 @@
 <form #editPost="ngForm" (ngSubmit)="onSubmit()" *ngIf="post">
   <div class="modal-body" style="padding-bottom: 0px;">
     <div class="row form-group">
-      <label for="title" class="col-sm-2 align-self-end">Title</label>
+      <label for="title" class="col-sm-2 align-self-center">Title</label>
       <input class="form-control col-sm-9" type="text" id="title" name="title"
         [(ngModel)]="post.title">
     </div>
     <div class="row form-group">
-      <label for="content" class="col-sm-2 align-self-end">Content</label>
+      <label for="content" class="col-sm-2 align-self-center">Content</label>
       <textarea class="form-control col-sm-9" id="content" rows="5" name="content" required
         [(ngModel)]="post.content"></textarea>
+    </div>
+    <div class="row form-group">
+      <label for="image" class="col-sm-2 align-self-baseline">Image</label>
+      <div class="col-sm-5" style="padding-left: 0px;">
+        <div class="image">
+          <img [src]="'data:image/png;base64,' + oldSource">
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label for="file" class="col-sm-2 align-self-baseline">New Image</label>
+      <div class="col-sm-5" style="padding-left: 0px;">
+        <div>
+          <input type="file" id="file" class="form-control" (change)="processFile($event)" />
+        </div>
+        <div class="image">
+          <img [src]="source">
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer rightPadding">

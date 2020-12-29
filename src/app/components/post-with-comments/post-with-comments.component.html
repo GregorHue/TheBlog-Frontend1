@@ -12,7 +12,7 @@
             {{post.title}}
           </div>
           <div class="card-subtitle">
-            <span class="font-italic">
+            <span class="badge badge-primary">
               {{post.category.name}}
             </span>
           </div>
@@ -50,7 +50,13 @@
                 </button>
               </ng-template>
             </div>
-            <div class="col-11 align-self-center">
+            <div class="col-4 col-md-3 col-lg-2 align-self-center">
+              <div class="card-img">
+                <img [src]="'data:image/jpg;base64,'+post.image"
+                  style="height: 110px; width: 110px;" />
+              </div>
+            </div>
+            <div class="col-7 col-md-8 col-lg-9 align-self-center">
               <div class="card-text">
                 {{post.content}}
               </div>
@@ -101,7 +107,7 @@
       <div class="row" *ngIf="post">
         <div class="col">
           <h4 class="text-center" *ngIf="post.numberOfComments === 1, else plural">
-            {{post.numberOfComments}}{{'  Comment'}}
+            {{post.numberOfComments}}{{' Comment'}}
           </h4>
           <ng-template #plural>
             <h4 class="text-center">
@@ -112,8 +118,8 @@
       </div>
       <div class="row">
         <div class="col-sm-12 col-md-9 col-xl-10">
-          <div *ngFor="let comment of comments | sortCommentBy : comparator" class="card mb-3">
-            <div class="card-body" style="padding-bottom: 10; padding-top: 5">
+          <div *ngFor="let comment of comments | sortCommentBy : comparator" class="card mb-2">
+            <div class="card-body">
               <div class="row  d-flex">
                 <div class="col-1 align-self-center text-center">
                   <div *ngIf="authService.loggedInUserUrl === ''; else buttonCommentUpvote">

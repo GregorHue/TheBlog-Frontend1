@@ -7,22 +7,38 @@
 <form #createPost="ngForm" (ngSubmit)="onSubmit()" *ngIf="newPost">
   <div class="modal-body" style="padding-bottom: 0px;">
     <div class="row form-group">
-      <label for="title" class="col-sm-2 align-self-end">Title</label>
+      <label for="title" class="col-sm-2 align-self-center">Title</label>
       <input class="form-control col-sm-9" type="text" id="title" name="title"
         [(ngModel)]="newPost.title">
     </div>
     <div class="row form-group">
-      <label for="content" class="col-sm-2 align-self-end">Content</label>
+      <label for="content" class="col-sm-2 align-self-center">Content</label>
       <textarea class="form-control col-sm-9" id="content" rows="5" name="content" required
         [(ngModel)]="newPost.content"></textarea>
     </div>
     <div class="row form-group">
-      <label for="category" class="col-sm-2 align-self-end">Category</label>
-      <select class="form-control col-sm-4" id="category" name="category"
+      <label for="category" class="col-sm-2 align-self-center">Category</label>
+      <select class="form-control col-sm-5" id="category" name="category"
         [(ngModel)]="newPost.category">
         <option *ngFor="let category of displayedCategories" [value]="category">{{category}}
         </option>
       </select>
+    </div>
+    <div class="row form-group">
+      <label for="file" class="col-sm-2 align-self-baseline">Image</label>
+      <div class="col-sm-5" style="padding-left: 0px;">
+        <div>
+          <input type="file" id="file" class="form-control" (change)="processFile($event)" />
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <label for="file" class="col-sm-2 align-self-center">Preview</label>
+      <div class="col-sm-5" style="padding-left: 0px;">
+        <div class="image">
+          <img [src]="source">
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer rightPadding">

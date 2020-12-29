@@ -17,8 +17,10 @@
           <div class="card-title font-weight-bolder">
             {{post.title}}
           </div>
-          <div class="card-subtitle font-italic">
-            {{post.category.name}}
+          <div class="card-subtitle">
+            <span class="badge badge-primary">
+              {{post.category.name}}
+            </span>
           </div>
           <hr />
           <div class="row">
@@ -53,7 +55,7 @@
                 </button>
               </ng-template>
             </div>
-            <div class="col-4 col-md-3 col-lg-2">
+            <div class="col-4 col-md-3 col-lg-2 align-self-center">
               <div class="card-img">
                 <img [src]="'data:image/jpg;base64,'+post.image"
                   style="height: 110px; width: 110px;" />
