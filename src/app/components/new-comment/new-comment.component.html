@@ -4,12 +4,18 @@
     <span>&times;</span>
   </button>
 </div>
-<form #editPost="ngForm" (ngSubmit)="onSubmit()" *ngIf="newComment">
+<form #createComment="ngForm" (ngSubmit)="onSubmit()" *ngIf="newComment">
   <div class="modal-body" style="padding-bottom: 0px;">
     <div class="row form-group">
       <label for="content" class="col-sm-2 align-self-center">Content</label>
       <textarea class="form-control col-sm-9" id="content" rows="5" name="content" required
-        [(ngModel)]="newComment.content"></textarea>
+        [(ngModel)]="newComment.content" #content=ngModel></textarea>
+      <div *ngIf="submitted && content.invalid"
+        class="alert alert-danger mt-2 col-sm-9 offset-2 py-0">
+        <div *ngIf="content.errors.required">
+          Content is required.
+        </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer rightPadding">

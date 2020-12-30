@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Comment } from 'src/app/interfaces/comment';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CommentService } from 'src/app/services/comment.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-new-comment',
@@ -10,7 +11,10 @@ import { CommentService } from 'src/app/services/comment.service';
 })
 export class NewCommentComponent implements OnInit {
 
+  submitted = false;
+
   @Input() newComment: Comment;
+  @ViewChild('createComment') form: NgForm;
 
   constructor(public activeModal: NgbActiveModal, private commentService: CommentService) { }
 
@@ -18,6 +22,9 @@ export class NewCommentComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.activeModal.close(this.commentService.create(this.newComment));
+    this.submitted = true;
+    if (this.form.form.valid) {
+      this.activeModal.close(this.commentService.create(this.newComment));
+    }
   }
 }

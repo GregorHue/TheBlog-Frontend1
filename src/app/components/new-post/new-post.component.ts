@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from 'src/app/interfaces/post';
 import { CategoryService } from 'src/app/services/category.service';
 import { Category } from 'src/app/interfaces/category';
 import { PostService } from 'src/app/services/post.service';
 import { ImageService } from 'src/app/services/image.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-new-post',
@@ -16,8 +17,10 @@ export class NewPostComponent implements OnInit {
   categories: Category[];
   displayedCategories: string[];
   source: string;
+  submitted = false;
 
   @Input() newPost: Post;
+  @ViewChild('createPost') form: NgForm;
 
   constructor(public activeModal: NgbActiveModal, private categoryService: CategoryService, private postService: PostService, private imageService: ImageService) { }
 
@@ -29,7 +32,10 @@ export class NewPostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.activeModal.close(this.postService.create(this.newPost));
+    this.submitted = true;
+    if (this.form.form.valid) {
+      this.activeModal.close(this.postService.create(this.newPost));
+    }
   }
 
   processFile(event: Event): void {

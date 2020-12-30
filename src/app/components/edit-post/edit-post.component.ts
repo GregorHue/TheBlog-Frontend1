@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Post } from 'src/app/interfaces/post';
 import { ImageService } from 'src/app/services/image.service';
@@ -14,8 +15,10 @@ export class EditPostComponent implements OnInit {
 
   oldSource: string;
   source: string;
+  submitted = false;
 
   @Input() post: Post;
+  @ViewChild('editPost') form: NgForm;
 
   constructor(public activeModal: NgbActiveModal, private postService: PostService, private imageService: ImageService) { }
 
@@ -24,7 +27,10 @@ export class EditPostComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.activeModal.close(this.postService.update(this.post));
+    this.submitted = true;
+    if (this.form.form.valid) {
+      this.activeModal.close(this.postService.update(this.post));
+    }
   }
 
   processFile(event: Event): void {

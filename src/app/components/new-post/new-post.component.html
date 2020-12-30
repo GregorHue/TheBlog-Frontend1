@@ -8,21 +8,39 @@
   <div class="modal-body" style="padding-bottom: 0px;">
     <div class="row form-group">
       <label for="title" class="col-sm-2 align-self-center">Title</label>
-      <input class="form-control col-sm-9" type="text" id="title" name="title"
-        [(ngModel)]="newPost.title">
+      <input class="form-control col-sm-9" type="text" id="title" name="title" required
+        [(ngModel)]="newPost.title" #title=ngModel>
+      <div *ngIf="submitted && title.invalid"
+        class="alert alert-danger mt-2 col-sm-9 offset-2 py-0">
+        <div *ngIf="title.errors.required">
+          Title is required.
+        </div>
+      </div>
     </div>
     <div class="row form-group">
       <label for="content" class="col-sm-2 align-self-center">Content</label>
       <textarea class="form-control col-sm-9" id="content" rows="5" name="content" required
-        [(ngModel)]="newPost.content"></textarea>
+        [(ngModel)]="newPost.content" #content=ngModel></textarea>
+      <div *ngIf="submitted && content.invalid"
+        class="alert alert-danger mt-2 col-sm-9 offset-2 py-0">
+        <div *ngIf="content.errors.required">
+          Content is required.
+        </div>
+      </div>
     </div>
     <div class="row form-group">
       <label for="category" class="col-sm-2 align-self-center">Category</label>
-      <select class="form-control col-sm-5" id="category" name="category"
-        [(ngModel)]="newPost.category">
+      <select class="form-control col-sm-5" id="category" name="category" required
+        [(ngModel)]="newPost.category" #category=ngModel>
         <option *ngFor="let category of displayedCategories" [value]="category">{{category}}
         </option>
       </select>
+      <div *ngIf="submitted && category.invalid"
+        class="alert alert-danger mt-2 col-sm-5 offset-2 py-0">
+        <div *ngIf="category.errors.required">
+          Category is required.
+        </div>
+      </div>
     </div>
     <div class="row form-group">
       <label for="file" class="col-sm-2 align-self-baseline">Image</label>

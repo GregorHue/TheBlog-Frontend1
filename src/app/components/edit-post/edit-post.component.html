@@ -9,12 +9,24 @@
     <div class="row form-group">
       <label for="title" class="col-sm-2 align-self-center">Title</label>
       <input class="form-control col-sm-9" type="text" id="title" name="title"
-        [(ngModel)]="post.title">
+        [(ngModel)]="post.title" #title=ngModel required>
+      <div *ngIf="submitted && title.invalid"
+        class="alert alert-danger mt-2 col-sm-9 offset-2 py-0">
+        <div *ngIf="title.errors.required">
+          Title is required.
+        </div>
+      </div>
     </div>
     <div class="row form-group">
       <label for="content" class="col-sm-2 align-self-center">Content</label>
       <textarea class="form-control col-sm-9" id="content" rows="5" name="content" required
-        [(ngModel)]="post.content"></textarea>
+        [(ngModel)]="post.content" #content=ngModel></textarea>
+      <div *ngIf="submitted && content.invalid"
+        class="alert alert-danger mt-2 col-sm-9 offset-2 py-0">
+        <div *ngIf="content.errors.required">
+          Content is required.
+        </div>
+      </div>
     </div>
     <div class="row form-group">
       <label for="image" class="col-sm-2 align-self-baseline">Image</label>
