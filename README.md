@@ -56,6 +56,8 @@ In detail:
 * A new user can signup by hitting the endpoint `localhost:3000/signup` with chosen username and password.
 
 * A user can login by hitting the endpoint `localhost:3000/login` with valid credentials. 
+
+* Display and upload of images
  
 ## Technology
 
@@ -68,3 +70,14 @@ In detail:
 * Autorisation and authorization with JSON web token
 
 * Responsive UI with Bootstrap 
+
+## Screenshots
+
+### Home Page
+![Home Page](screenshots/Home_angular.png)
+
+### Create Post
+![Create Post](screenshots/CreatePost_angular.png)
+
+### Create Comment
+![Create Comment](screenshots/CreateComment_angular.png)
