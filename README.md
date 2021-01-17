@@ -1,6 +1,6 @@
 | Build Status  | 
 |---|
-|[![CircleCI](https://circleci.com/gh/GregorHue/TheBlog-Frontend1.svg?style=svg&circle-token=5cacc42554d1f896a9d8036f4a1bc6cf76b95225)](https://circleci.com/gh/GregorHue/TheBlog-Frontend1)|
+|[![CircleCI](https://circleci.com/gh/GregorHue/TheBlog-Frontend1.svg?style=svg)](https://circleci.com/gh/GregorHue/TheBlog-Frontend1)|
 
 # TheBlog-Angular
 
