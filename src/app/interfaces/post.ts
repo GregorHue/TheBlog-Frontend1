@@ -14,6 +14,7 @@ export interface Post {
   comments_url: string,
   numberOfComments: number,
   image: string,
+  avatar: string,
   option: Vote,
   authorname: string
 }

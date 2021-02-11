@@ -1,16 +1,19 @@
 <h3 class="text-center mb-3">Edit Profile</h3>
 <div class="container">
-  <ngb-alert [type]="'success'" (close)="closeAlert()" *ngIf="isAlertOpen">The changes were
-    succesfully
-    saved.</ngb-alert>
+  <ngb-alert [type]="'success'" *ngIf="isAlertSuccessOpen" (close)="closeSuccessAlert()">
+    {{successMessage}}
+  </ngb-alert>
+  <ngb-alert [type]="'danger'" *ngIf="isAlertFailureOpen" (close)="closeFailureAlert()">
+    {{errorMessage}}
+  </ngb-alert>
   <form #user="ngForm" (ngSubmit)="onSubmit()" *ngIf="model">
-    <div class="row form-group">
-      <label for="username" class="col-sm-2 align-self-end">Username</label>
-      <input type="text" class="form-control col-sm-4" id="username" name="username" required
-        [(ngModel)]="model.username">
-    </div>
     <div class="row">
       <div class="col-sm-6">
+        <div class="row form-group">
+          <label for="username" class="col-sm-4 align-self-end">Username</label>
+          <input type="text" class="form-control col-sm-8" id="username" name="username" required
+            [(ngModel)]="model.username">
+        </div>
         <div class="row form-group">
           <label for="password" class="col-sm-4 align-self-end">New Password</label>
           <input class="form-control col-sm-8" type="password" id="password" name="password"
@@ -39,16 +42,24 @@
           </select>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-5 offset-1 my-5">
         <div class="row">
-          <div class="col text-center">
-            <h4 style="margin-left: 40px;">Profile Picture</h4>
+          <div class="row form-group px-3">
+            <label for="image" class="col-sm-4 align-self-end">Avatar</label>
+            <div class="col-sm-2 offset-5">
+              <img [src]="'data:image/png;base64,' + model.avatar"
+                style="height: 48px; width: 48px;">
+            </div>
           </div>
         </div>
         <div class="row">
-          <div class="col text-center">
-            <span style="font-size: 192px; margin-left: 40px; opacity: 0.7;"
-              class="fa fa-photo fa-5x"></span>
+          <div class="row form-group px-3">
+            <label for="file" class="col-sm-3 align-self-end">New Avatar</label>
+            <div class="col-sm-8">
+              <div>
+                <input type="file" id="file" class="form-control" (change)="processFile($event)" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

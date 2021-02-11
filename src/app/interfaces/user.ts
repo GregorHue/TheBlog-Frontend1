@@ -16,6 +16,7 @@ export interface User {
   user_url: string;
   posts_url: string;
   deletedTs: Date;
+  avatar: string;
 }
 
 export interface UserDtoList {

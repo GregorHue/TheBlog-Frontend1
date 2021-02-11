@@ -7,7 +7,7 @@
 <form #createPost="ngForm" (ngSubmit)="onSubmit()" *ngIf="newPost">
   <div class="modal-body" style="padding-bottom: 0px;">
     <div class="row form-group">
-      <label for="title" class="col-sm-2 align-self-center">Title</label>
+      <label for="title" class="col-sm-2 align-self-center">Title*</label>
       <input class="form-control col-sm-9" type="text" id="title" name="title" required
         [(ngModel)]="newPost.title" #title=ngModel>
       <div *ngIf="submitted && title.invalid"
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="row form-group">
-      <label for="content" class="col-sm-2 align-self-center">Content</label>
+      <label for="content" class="col-sm-2 align-self-center">Content*</label>
       <textarea class="form-control col-sm-9" id="content" rows="5" name="content" required
         [(ngModel)]="newPost.content" #content=ngModel></textarea>
       <div *ngIf="submitted && content.invalid"
@@ -29,7 +29,7 @@
       </div>
     </div>
     <div class="row form-group">
-      <label for="category" class="col-sm-2 align-self-center">Category</label>
+      <label for="category" class="col-sm-2 align-self-center">Category*</label>
       <select class="form-control col-sm-5" id="category" name="category" required
         [(ngModel)]="newPost.category" #category=ngModel>
         <option *ngFor="let category of displayedCategories" [value]="category">{{category}}

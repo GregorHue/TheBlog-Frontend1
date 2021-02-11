@@ -7,7 +7,7 @@
   <div class="row">
     <div class="col">
       <div class="card mb-2" *ngIf="post">
-        <div class="card-body">
+        <div class="card-body pt-1">
           <div class="card-title font-weight-bolder">
             {{post.title}}
           </div>
@@ -94,8 +94,11 @@
                     {{post.createdAt.toString().substring(0, 10)}}</span>
                 </div>
               </ng-template>
-              <div class="align-self-end mx-2"><span
-                  class="fa fa-user-circle fa-2x text-secondary"></span>
+              <div class="align-self-end mx-2">
+                <div class="card-img">
+                  <img [src]="'data:image/jpg;base64,'+post.avatar"
+                    style="height: 48px; width: 48px;" />
+                </div>
               </div>
               <div class="align-self-center font-italic">
                 {{post.authorname}}
@@ -119,7 +122,7 @@
       <div class="row">
         <div class="col-sm-12 col-md-9 col-xl-10">
           <div *ngFor="let comment of comments | sortCommentBy : comparator" class="card mb-2">
-            <div class="card-body">
+            <div class="card-body pt-0 pb-1">
               <div class="row  d-flex">
                 <div class="col-1 align-self-center text-center">
                   <div *ngIf="authService.loggedInUserUrl === ''; else buttonCommentUpvote">
@@ -179,8 +182,11 @@
                         {{comment.createdAt.toString().substring(0, 10)}}</span>
                     </div>
                   </ng-template>
-                  <div class="align-self-end mx-2"><span
-                      class="fa fa-user-circle fa-2x text-secondary"></span>
+                  <div class="align-self-end mx-2">
+                    <div class="card-img">
+                      <img [src]="'data:image/jpg;base64,'+comment.avatar"
+                        style="height: 48px; width: 48px;" />
+                    </div>
                   </div>
                   <div class="align-self-center font-italic">
                     {{comment.authorname}}

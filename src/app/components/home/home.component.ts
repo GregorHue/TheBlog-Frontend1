@@ -69,6 +69,7 @@ export class HomeComponent implements OnInit {
       comments_url: null,
       numberOfComments: null,
       image: null,
+      avatar: null,
       option: null,
       authorname: null
     }

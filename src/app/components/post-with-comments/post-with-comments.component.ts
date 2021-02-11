@@ -63,6 +63,7 @@ export class PostWithCommentsComponent implements OnInit {
       post_url: this.post.post_url,
       comment_url: null,
       option: null,
+      avatar: null,
       authorname: null
     }
     modalRef.componentInstance.newComment = newComment;

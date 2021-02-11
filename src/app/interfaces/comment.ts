@@ -10,6 +10,7 @@ export interface Comment {
   author_url: string,
   post_url: string,
   option: Vote,
+  avatar: string,
   authorname: string
 }
 
